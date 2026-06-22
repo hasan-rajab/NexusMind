@@ -1,0 +1,9 @@
+groq
+tavily-python
+chromadb
+sentence-transformers
+fastapi
+uvicorn[standard]
+pyngrok
+python-multipart
+aiofiles
