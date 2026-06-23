@@ -2,7 +2,7 @@ import os
 
 # ── LLM ──────────────────────────────────────────────────────────────────────
 GROQ_MODEL       = "llama-3.1-8b-instant"
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_API_KEY     = os.environ.get("GROQ_API_KEY", "")
 
 # ── Search ────────────────────────────────────────────────────────────────────
 TAVILY_API_KEY      = os.environ.get("TAVILY_API_KEY", "")
