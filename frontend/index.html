@@ -166,18 +166,42 @@
 
 <script>
   let activeRole  = 'assistant';
-  let history     = [];
   let isStreaming = false;
-
-  // pending feedback context
   let pendingFeedback = null;
+
+  // ── Per-role state ──────────────────────────────────────────────────
+  const roles = ['assistant', 'trainer', 'researcher', 'consultant'];
+
+  const histories = Object.fromEntries(roles.map(r => [r, []]));
+  const chatNodes = Object.fromEntries(roles.map(r => [r, []])); // DOM node refs per role
+
+  // One chat container per role — only active one visible
+  const chatEl = document.getElementById('chat');
+  const roleContainers = {};
+  roles.forEach(r => {
+    const div = document.createElement('div');
+    div.id = `chat-${r}`;
+    div.style.display = r === 'assistant' ? 'contents' : 'none';
+    chatEl.appendChild(div);
+    roleContainers[r] = div;
+  });
+
+  // Move the empty state into assistant container
+  const emptyState = document.getElementById('emptyState');
+  if (emptyState) roleContainers['assistant'].appendChild(emptyState);
 
   // ── Role switching ──────────────────────────────────────────────────
   document.querySelectorAll('.role-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (isStreaming) return;
       document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+
+      // Hide current, show new
+      roleContainers[activeRole].style.display = 'none';
       activeRole = btn.dataset.role;
+      roleContainers[activeRole].style.display = 'contents';
+      chatEl.scrollTop = chatEl.scrollHeight;
     });
   });
 
@@ -190,7 +214,7 @@
     const empty = document.getElementById('emptyState');
     if (empty) empty.remove();
 
-    const chat = document.getElementById('chat');
+    const chat = roleContainers[activeRole];
     const wrap = document.createElement('div');
     wrap.className = `msg ${role}`;
 
@@ -225,7 +249,7 @@
     }
 
     chat.appendChild(wrap);
-    chat.scrollTop = chat.scrollHeight;
+    chatEl.scrollTop = chatEl.scrollHeight;
     return wrap;
   }
 
@@ -255,7 +279,7 @@
       const res = await fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, role: activeRole, history }),
+        body: JSON.stringify({ query, role: activeRole, history: histories[activeRole] }),
       });
 
       const reader  = res.body.getReader();
@@ -286,7 +310,7 @@
             if (p.chunk) {
               fullText += p.chunk;
               content.textContent = fullText;
-              document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+              chatEl.scrollTop = chatEl.scrollHeight;
             }
           } catch(_) {}
         }
@@ -303,9 +327,9 @@
         aiWrap._dnBtn.onclick = () => openFeedbackModal(turnId, activeRole, query, fullText);
       }
 
-      history.push({ role: 'user',      content: query });
-      history.push({ role: 'assistant', content: fullText });
-      if (history.length > 40) history = history.slice(-40);
+      histories[activeRole].push({ role: 'user',      content: query });
+      histories[activeRole].push({ role: 'assistant', content: fullText });
+      if (histories[activeRole].length > 40) histories[activeRole] = histories[activeRole].slice(-40);
 
       document.getElementById('send-btn').disabled = false;
       isStreaming = false;
