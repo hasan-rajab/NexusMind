@@ -171,22 +171,27 @@
 
   // ── Per-role state ──────────────────────────────────────────────────
   const roles = ['assistant', 'trainer', 'researcher', 'consultant'];
-
   const histories = Object.fromEntries(roles.map(r => [r, []]));
-  const chatNodes = Object.fromEntries(roles.map(r => [r, []])); // DOM node refs per role
 
-  // One chat container per role — only active one visible
+  // One flex column container per role sitting inside #chat
   const chatEl = document.getElementById('chat');
   const roleContainers = {};
+
   roles.forEach(r => {
     const div = document.createElement('div');
     div.id = `chat-${r}`;
-    div.style.display = r === 'assistant' ? 'contents' : 'none';
+    div.style.cssText = `
+      display: ${r === 'assistant' ? 'flex' : 'none'};
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      min-height: 100%;
+    `;
     chatEl.appendChild(div);
     roleContainers[r] = div;
   });
 
-  // Move the empty state into assistant container
+  // Move the existing empty state into the assistant container
   const emptyState = document.getElementById('emptyState');
   if (emptyState) roleContainers['assistant'].appendChild(emptyState);
 
@@ -196,11 +201,16 @@
       if (isStreaming) return;
       document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      // Hide current, show new
       roleContainers[activeRole].style.display = 'none';
       activeRole = btn.dataset.role;
-      roleContainers[activeRole].style.display = 'contents';
+      roleContainers[activeRole].style.display = 'flex';
+      // Show empty state placeholder if no messages yet
+      if (roleContainers[activeRole].children.length === 0) {
+        const ph = document.createElement('div');
+        ph.className = 'empty-state';
+        ph.innerHTML = `<h2>⚡ ${activeRole.charAt(0).toUpperCase()+activeRole.slice(1)} Mode</h2><p>Start a conversation.</p>`;
+        roleContainers[activeRole].appendChild(ph);
+      }
       chatEl.scrollTop = chatEl.scrollHeight;
     });
   });
@@ -211,10 +221,12 @@
 
   // ── Append message ──────────────────────────────────────────────────
   function appendMsg(role, text, roleTag, toolsUsed) {
-    const empty = document.getElementById('emptyState');
-    if (empty) empty.remove();
+    // Remove any empty-state placeholder in the active container
+    const container = roleContainers[activeRole];
+    const ph = container.querySelector('.empty-state');
+    if (ph) ph.remove();
 
-    const chat = roleContainers[activeRole];
+    const chat = container;
     const wrap = document.createElement('div');
     wrap.className = `msg ${role}`;
 
