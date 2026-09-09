@@ -1,0 +1,8 @@
+# Microsoft AI / agent orchestration profile (Python 3.10+)
+azure-ai-projects>=2.3.0
+agent-framework
+agent-framework-foundry
+semantic-kernel
+autogen-agentchat
+autogen-ext[openai,azure]
+# Copilot Studio compatibility is exposed through FastAPI OpenAPI at /openapi.json.

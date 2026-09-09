@@ -1,0 +1,1 @@
+"""Microsoft agent orchestration adapters."""
