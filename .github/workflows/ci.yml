@@ -23,4 +23,6 @@ jobs:
       - name: Compile Python sources
         run: python -m compileall -q .
       - name: Run governance and orchestration unit tests
-        run: pytest -q tests/test_governance.py tests/test_memory.py tests/test_enterprise_api.py
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -q tests/test_governance.py tests/test_memory.py tests/test_enterprise_api.py
