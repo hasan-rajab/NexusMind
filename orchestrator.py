@@ -1,9 +1,13 @@
 """
 NexusMind Enterprise Orchestrator
 
-Provider-agnostic agent loop with Azure OpenAI or Groq generation, tool calling,
-local Chroma or Azure AI Search retrieval, bounded session memory, allowlisted
-enterprise API access, and audit events for governance and traceability.
+Provider-agnostic agent loop with:
+- Azure OpenAI or Groq generation
+- tool calling
+- local Chroma or Azure AI Search retrieval
+- bounded session memory
+- allowlisted enterprise API access
+- audit events for governance and traceability
 """
 from __future__ import annotations
 
@@ -64,7 +68,7 @@ def _retrieve(query: str, role: str, tenant_id: str) -> str:
     if RAG_PROVIDER == "azure_search":
         from tools.azure_search import retrieve
         return retrieve(query=query, role=role, tenant_id=tenant_id)
-    return retrieve_user_data(query=query, role=role)
+    return retrieve_user_data(query=query, role=role, tenant_id=tenant_id)
 
 
 def _execute_tool(name: str, args: dict, active_role: str, tenant_id: str) -> str:

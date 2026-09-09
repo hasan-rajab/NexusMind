@@ -4,6 +4,11 @@ chromadb
 sentence-transformers
 fastapi
 uvicorn[standard]
-pyngrok
 python-multipart
 aiofiles
+httpx
+openai
+azure-core
+azure-identity
+azure-search-documents
+pyngrok
