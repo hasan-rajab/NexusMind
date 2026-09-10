@@ -8,6 +8,10 @@ Provider-agnostic agent loop with:
 - bounded session memory
 - allowlisted enterprise API access
 - audit events for governance and traceability
+
+Important trust boundary: the model never chooses its own retrieval role. The
+active application role is supplied by the server-side orchestration context and
+is reused for enterprise retrieval regardless of tool-call arguments.
 """
 from __future__ import annotations
 
@@ -41,10 +45,10 @@ TOOLS = [
         "type": "function",
         "function": {
             "name": "retrieve_enterprise_knowledge",
-            "description": "Retrieve authorized grounded enterprise knowledge using Azure AI Search in production or Chroma locally.",
+            "description": "Retrieve grounded enterprise knowledge inside the server-selected tenant/role context.",
             "parameters": {
                 "type": "object",
-                "properties": {"query": {"type": "string"}, "role": {"type": "string"}},
+                "properties": {"query": {"type": "string"}},
                 "required": ["query"],
             },
         },
@@ -75,7 +79,9 @@ def _execute_tool(name: str, args: dict, active_role: str, tenant_id: str) -> st
     if name == "web_search":
         return web_search(args["query"])
     if name == "retrieve_enterprise_knowledge":
-        return _retrieve(args["query"], args.get("role", active_role), tenant_id)
+        # Never accept a role from model-generated tool arguments. Retrieval
+        # scope belongs to the application/server context, not the LLM.
+        return _retrieve(args["query"], active_role, tenant_id)
     if name == "enterprise_api_get":
         return enterprise_api_get(args["url"])
     return f"Unknown tool: {name}"
