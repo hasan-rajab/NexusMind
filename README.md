@@ -102,3 +102,6 @@ The harness reports observed metrics only; it does not hard-code performance cla
 
 ## Security notes
 This is a portfolio/reference architecture, not a substitute for an enterprise security review. For production prefer Microsoft Entra ID / managed identity, API Management, private networking where required, filterable tenant/role fields in Azure AI Search, content-safety policies, and human approval for write-capable enterprise actions.
+
+## Customer delivery case
+For the forward-deployed/customer-engineering view of this system, see [`docs/CUSTOMER_DELIVERY_CASE.md`](docs/CUSTOMER_DELIVERY_CASE.md). It walks from ambiguous customer problem and discovery questions through architecture, rollout, measurable success criteria, failure modes, and scale decisions without claiming a fictional production customer deployment.
