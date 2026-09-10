@@ -1,9 +1,16 @@
 # NexusMind — Enterprise Agentic AI + Governed RAG
 
-Production-oriented **Generative AI / Agentic AI** platform for enterprise and government use cases. NexusMind combines **Microsoft Foundry, Azure OpenAI, Azure AI Search, RAG, multi-agent orchestration, tool calling, memory, evaluation, security, governance, APIs, CI/CD and containers** while preserving a local-development fallback.
+Production-oriented enterprise AI platform for turning fragmented internal knowledge and trusted tools into **governed, auditable workflows**. The core engineering problem is not “build a chatbot”; it is how to move from an ambiguous user need to retrieved evidence, bounded agent/tool execution, evaluation, approval, audit, and deployment **without giving the model uncontrolled authority**.
+
+The reference implementation uses **Microsoft Foundry, Azure OpenAI, Azure AI Search, RAG, multi-agent orchestration, tool calling, memory, evaluation, security, governance, APIs, CI/CD and containers**, with a local-development fallback so the architecture remains reproducible without claiming a live enterprise deployment.
 
 ## What it demonstrates
-**requirement → data/retrieval → agent workflow → tool/API integration → evaluation → security/governance → deployment**
+**ambiguous requirement → data/retrieval → agent workflow → tool/API integration → evaluation → security/governance → deployment → user feedback**
+
+The forward-deployed view is documented in [`docs/CUSTOMER_DELIVERY_CASE.md`](docs/CUSTOMER_DELIVERY_CASE.md): discovery questions, architecture, rollout, success measures, failure modes, and scale decisions for a fictional regional enterprise.
+
+### Portfolio scope
+NexusMind and **NEXUS** in [`Gulf-Policy-Assistant`](https://github.com/hasan-rajab/Gulf-Policy-Assistant) are complementary rather than duplicate implementations. **NexusMind** concentrates on Microsoft/Azure agent orchestration, enterprise tool integration, and the customer-delivery path. **NEXUS** concentrates on authorization-before-retrieval, approval-gated side effects, audit integrity, and a Google Cloud/BigQuery architecture. Keeping the two separate makes the different control and cloud-design trade-offs inspectable.
 
 ## Microsoft AI architecture
 - **Microsoft Foundry**: Foundry-native agents through Microsoft Agent Framework
