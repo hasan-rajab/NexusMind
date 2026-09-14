@@ -4,10 +4,23 @@ Production-oriented enterprise AI platform for turning fragmented internal knowl
 
 The reference implementation uses **Microsoft Foundry, Azure OpenAI, Azure AI Search, RAG, multi-agent orchestration, tool calling, memory, evaluation, security, governance, APIs, CI/CD and containers**, with a local-development fallback so the architecture remains reproducible without claiming a live enterprise deployment.
 
-## What it demonstrates
+## Consulting case at a glance
+
+**Client question:** How should a regional enterprise use GenAI to reduce internal knowledge-work friction without creating unacceptable security, compliance, or operational risk?
+
+**Recommendation:** Start with one governed, read-only RAG workflow; prove business value, retrieval quality, authorization, abstention, bilingual performance, adoption, latency, and economics against predefined gates; only then introduce approval-gated agent actions.
+
+**Case logic:**  
+**business problem → baseline → hypotheses → options → value case → recommendation → architecture → pilot → KPI gates → scale**
+
+Read the full consulting case: **[`docs/CONSULTING_CASE_STUDY.md`](docs/CONSULTING_CASE_STUDY.md)**.
+
+It includes the issue tree, discovery plan, stakeholder map, value model, strategic options, recommendation, target operating model, KPI tree, risk register, 90-day roadmap, executive one-slide summary, and interview talk track. Any financial figures in the case are explicitly illustrative assumptions rather than claimed client results.
+
+## What the implementation demonstrates
 **ambiguous requirement → data/retrieval → agent workflow → tool/API integration → evaluation → security/governance → deployment → user feedback**
 
-The forward-deployed view is documented in [`docs/CUSTOMER_DELIVERY_CASE.md`](docs/CUSTOMER_DELIVERY_CASE.md): discovery questions, architecture, rollout, success measures, failure modes, and scale decisions for a fictional regional enterprise.
+The companion [`docs/CUSTOMER_DELIVERY_CASE.md`](docs/CUSTOMER_DELIVERY_CASE.md) focuses on the forward-deployed/customer-engineering view: discovery questions, architecture, rollout, success measures, failure modes, and scale decisions for a fictional regional enterprise.
 
 ### Portfolio scope
 NexusMind and **NEXUS** in [`Gulf-Policy-Assistant`](https://github.com/hasan-rajab/Gulf-Policy-Assistant) are complementary rather than duplicate implementations. **NexusMind** concentrates on Microsoft/Azure agent orchestration, enterprise tool integration, and the customer-delivery path. **NEXUS** concentrates on authorization-before-retrieval, approval-gated side effects, audit integrity, and a Google Cloud/BigQuery architecture. Keeping the two separate makes the different control and cloud-design trade-offs inspectable.
@@ -110,5 +123,10 @@ The harness reports observed metrics only; it does not hard-code performance cla
 ## Security notes
 This is a portfolio/reference architecture, not a substitute for an enterprise security review. For production prefer Microsoft Entra ID / managed identity, API Management, private networking where required, filterable tenant/role fields in Azure AI Search, content-safety policies, and human approval for write-capable enterprise actions.
 
-## Customer delivery case
-For the forward-deployed/customer-engineering view of this system, see [`docs/CUSTOMER_DELIVERY_CASE.md`](docs/CUSTOMER_DELIVERY_CASE.md). It walks from ambiguous customer problem and discovery questions through architecture, rollout, measurable success criteria, failure modes, and scale decisions without claiming a fictional production customer deployment.
+## Case-study documentation
+
+- **[`docs/CONSULTING_CASE_STUDY.md`](docs/CONSULTING_CASE_STUDY.md)** — executive/client problem, issue tree, hypotheses, value model, option analysis, recommendation, KPI gates, risks, operating model, roadmap, and interview narrative.
+- **[`docs/CUSTOMER_DELIVERY_CASE.md`](docs/CUSTOMER_DELIVERY_CASE.md)** — forward-deployed/customer-engineering view from discovery through rollout and scale.
+- **[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)** — enterprise architecture, Microsoft production path, security controls, and evaluation design.
+
+The repository is a portfolio/reference implementation. It does not claim a named client deployment, measured client ROI, or fabricated production benchmarks.
