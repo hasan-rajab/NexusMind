@@ -25,6 +25,16 @@ The project demonstrates the Microsoft/Azure path for that problem using Microso
 
 See the [customer delivery case](docs/CUSTOMER_DELIVERY_CASE.md) for the discovery → architecture → rollout → KPI → failure-mode story.
 
+## Consulting case
+
+**Client question:** How should a regional enterprise use GenAI to reduce internal knowledge-work friction without creating unacceptable security, compliance, or operational risk?
+
+**Recommendation:** Start with one governed, read-only RAG workflow; prove business value, retrieval quality, authorization, abstention, bilingual performance, adoption, latency, and economics against predefined gates; only then introduce approval-gated agent actions.
+
+**Case logic:** **business problem → baseline → hypotheses → options → value case → recommendation → architecture → pilot → KPI gates → scale**
+
+Read the full [consulting case study](docs/CONSULTING_CASE_STUDY.md), including the issue tree, discovery plan, illustrative value model, strategic options, KPI gates, risk register, operating model, 90-day roadmap, executive summary, and interview talk track. Financial figures are explicitly illustrative assumptions; the repository does not claim a named enterprise deployment or measured client ROI.
+
 ---
 
 ## Business value
