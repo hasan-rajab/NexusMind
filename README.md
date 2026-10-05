@@ -201,3 +201,7 @@ Production hardening would include:
 
 NexusMind is best read as evidence of **forward-deployed AI architecture and governed Microsoft-enterprise integration**, not a claim that an autonomous production agent has already been deployed.
 
+
+## Production deployment
+
+Deployment configuration and launch requirements are documented in [docs/PRODUCTION.md](docs/PRODUCTION.md). The deployment has not yet been verified live.

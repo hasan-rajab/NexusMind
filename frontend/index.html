@@ -107,6 +107,7 @@
 <header>
   <div class="logo"><div class="logo-icon">⚡</div>NexusMind</div>
   <div class="header-right">
+    <button class="stats-badge" onclick="setAccessKey()">Access key</button>
     <button class="stats-badge" onclick="toggleStats()">📊 Stats</button>
     <div class="role-selector" id="roleSelector">
       <button class="role-btn active" data-role="assistant">Assistant</button>
@@ -165,6 +166,26 @@
 </div>
 
 <script>
+  let accessKey = '';
+  function setAccessKey() {
+    const key = window.prompt('Enter your NexusMind access key. It is kept only for this page session.');
+    if (key !== null) accessKey = key.trim();
+  }
+  async function apiFetch(path, options = {}) {
+    const headers = new Headers(options.headers || {});
+    if (accessKey) headers.set('X-API-Key', accessKey);
+    const response = await fetch(path, { ...options, headers });
+    if (!response.ok) throw new Error(response.status === 401
+      ? 'Access denied. Use Access key to enter your key.'
+      : `Request failed (${response.status}).`);
+    return response;
+  }
+  function escapeHtml(value) {
+    const node = document.createElement('span');
+    node.textContent = String(value);
+    return node.innerHTML;
+  }
+  const pageSessionId = crypto.randomUUID();
   let activeRole  = 'assistant';
   let isStreaming = false;
   let pendingFeedback = null;
@@ -288,10 +309,10 @@
     let toolsUsed  = [];
 
     try {
-      const res = await fetch('/chat', {
+      const res = await apiFetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, role: activeRole, history: histories[activeRole] }),
+        body: JSON.stringify({ query, role: activeRole, history: histories[activeRole], session_id: pageSessionId }),
       });
 
       const reader  = res.body.getReader();
@@ -366,7 +387,7 @@
     const ideal = document.getElementById('idealResponse').value.trim();
     if (!ideal) { alert('Please write what the ideal response should have been.'); return; }
 
-    await fetch('/feedback', {
+    await apiFetch('/feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -390,19 +411,19 @@
     const panel = document.getElementById('statsPanel');
     if (panel.style.display !== 'none') { panel.style.display = 'none'; return; }
 
-    const res  = await fetch('/stats');
+    const res  = await apiFetch('/stats');
     const data = await res.json();
-    const wRes = await fetch('/weaknesses');
+    const wRes = await apiFetch('/weaknesses');
     const wData = await wRes.json();
 
     const wb = data.logs.weakness_breakdown || {};
-    const wbHtml = Object.entries(wb).map(([k,v]) => `<span style="margin-right:12px">${k}: <b>${v}</b></span>`).join('') || '—';
+    const wbHtml = Object.entries(wb).map(([k,v]) => `<span style="margin-right:12px">${escapeHtml(k)}: <b>${escapeHtml(v)}</b></span>`).join('') || '—';
 
     const wList = (wData.weaknesses || []).slice(-10).reverse().map(w => `
       <div class="weakness-item">
-        <div class="wtype">${w.weakness_type}</div>
-        <div style="color:var(--muted);margin-top:3px"><b>User:</b> ${w.user_query}</div>
-        <div style="margin-top:3px"><b>Ideal:</b> ${w.ideal_response.slice(0,120)}${w.ideal_response.length>120?'…':''}</div>
+        <div class="wtype">${escapeHtml(w.weakness_type)}</div>
+        <div style="color:var(--muted);margin-top:3px"><b>User:</b> ${escapeHtml(w.user_query)}</div>
+        <div style="margin-top:3px"><b>Ideal:</b> ${escapeHtml(w.ideal_response.slice(0,120))}${w.ideal_response.length>120?'…':''}</div>
       </div>`).join('') || '<div style="color:var(--muted);font-size:.8rem">No weaknesses flagged yet.</div>';
 
     panel.innerHTML = `

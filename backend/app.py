@@ -6,6 +6,7 @@ import os
 import sys
 import time
 from pathlib import Path
+from contextlib import asynccontextmanager
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -20,9 +21,20 @@ from config import ALLOWED_ORIGINS, ENVIRONMENT, LLM_PROVIDER, RAG_PROVIDER, REQ
 from governance import audit_event, validate_user_input, verify_api_key
 from logger import flag_weakness, get_stats as log_stats, load_weaknesses, log_interaction
 from memory import clear_memory, stats as memory_stats
-from tools.rag import get_stats as rag_stats, ingest
+from runtime import validate_production
 
-app = FastAPI(title="NexusMind Enterprise Agentic AI", version="1.0.0", description="Governed enterprise RAG and agentic AI service with Microsoft Foundry, Azure OpenAI, Azure AI Search, multi-agent orchestration and evaluation.")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    validate_production()
+    if RAG_PROVIDER == "chroma":
+        from tools.rag import get_stats
+        get_stats()
+    app.state.ready = True
+    yield
+    app.state.ready = False
+
+
+app = FastAPI(title="NexusMind Enterprise Agentic AI", version="1.0.0", description="Governed enterprise RAG and agentic AI service with Microsoft Foundry, Azure OpenAI, Azure AI Search, multi-agent orchestration and evaluation.", lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS, allow_methods=["GET", "POST"], allow_headers=["Content-Type", "Authorization", "X-API-Key", "X-Tenant-ID"])
 FRONTEND_PATH = Path(__file__).parent.parent / "frontend" / "index.html"
 
@@ -43,8 +55,21 @@ async def health():
 
 
 @app.get("/stats")
-async def stats():
-    return {"rag": rag_stats() if RAG_PROVIDER == "chroma" else {"provider": RAG_PROVIDER}, "logs": log_stats(), "memory": memory_stats()}
+async def stats(x_api_key: str | None = Header(default=None)):
+    _authorize(x_api_key)
+    if RAG_PROVIDER == "chroma":
+        from tools.rag import get_stats
+        rag = get_stats()
+    else:
+        rag = {"provider": RAG_PROVIDER}
+    return {"rag": rag, "logs": log_stats(), "memory": memory_stats()}
+
+
+@app.get("/ready")
+async def ready():
+    if not getattr(app.state, "ready", False):
+        raise HTTPException(status_code=503, detail="Service is not ready")
+    return {"status": "ok"}
 
 
 @app.get("/weaknesses")
@@ -138,6 +163,7 @@ async def ingest_data(request: Request, x_api_key: str | None = Header(default=N
         from tools.azure_search import upsert_document
         doc_id = upsert_document(text, metadata)
     else:
+        from tools.rag import ingest
         doc_id = ingest(text, metadata)
     audit_event("knowledge_ingested", {"id": doc_id, "tenant_id": x_tenant_id, "source": metadata.get("source", "")})
     return {"status": "ok", "id": doc_id, "provider": RAG_PROVIDER}
@@ -174,4 +200,3 @@ async def semantic_kernel_agent(request: Request, x_api_key: str | None = Header
     if not ok:
         raise HTTPException(status_code=400, detail=reason)
     return {"framework": "semantic-kernel", "result": await run_semantic_kernel_agent(task)}
-
