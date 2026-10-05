@@ -4,9 +4,13 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
 from pathlib import Path
+from contextlib import asynccontextmanager
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+from analytics.telemetry import capture as capture_analytics
 
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,9 +21,23 @@ from config import ALLOWED_ORIGINS, ENVIRONMENT, LLM_PROVIDER, RAG_PROVIDER, REQ
 from governance import audit_event, validate_user_input, verify_api_key
 from logger import flag_weakness, get_stats as log_stats, load_weaknesses, log_interaction
 from memory import clear_memory, stats as memory_stats
-from tools.rag import get_stats as rag_stats, ingest
+from runtime import validate_production
+from backend import public_demo
 
-app = FastAPI(title="NexusMind Enterprise Agentic AI", version="1.0.0", description="Governed enterprise RAG and agentic AI service with Microsoft Foundry, Azure OpenAI, Azure AI Search, multi-agent orchestration and evaluation.")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    validate_production()
+    if RAG_PROVIDER == "chroma":
+        from tools.rag import get_stats
+        get_stats()
+    public_demo.prepare()
+    app.state.ready = True
+    yield
+    app.state.ready = False
+
+
+app = FastAPI(title="NexusMind Enterprise Agentic AI", version="1.0.0", description="Governed enterprise RAG and agentic AI service with Microsoft Foundry, Azure OpenAI, Azure AI Search, multi-agent orchestration and evaluation.", lifespan=lifespan)
+app.include_router(public_demo.router)
 app.add_middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS, allow_methods=["GET", "POST"], allow_headers=["Content-Type", "Authorization", "X-API-Key", "X-Tenant-ID"])
 FRONTEND_PATH = Path(__file__).parent.parent / "frontend" / "index.html"
 
@@ -40,8 +58,21 @@ async def health():
 
 
 @app.get("/stats")
-async def stats():
-    return {"rag": rag_stats() if RAG_PROVIDER == "chroma" else {"provider": RAG_PROVIDER}, "logs": log_stats(), "memory": memory_stats()}
+async def stats(x_api_key: str | None = Header(default=None)):
+    _authorize(x_api_key)
+    if RAG_PROVIDER == "chroma":
+        from tools.rag import get_stats
+        rag = get_stats()
+    else:
+        rag = {"provider": RAG_PROVIDER}
+    return {"rag": rag, "logs": log_stats(), "memory": memory_stats()}
+
+
+@app.get("/ready")
+async def ready():
+    if not getattr(app.state, "ready", False):
+        raise HTTPException(status_code=503, detail="Service is not ready")
+    return {"status": "ok"}
 
 
 @app.get("/weaknesses")
@@ -64,6 +95,10 @@ async def chat(request: Request, x_api_key: str | None = Header(default=None), x
         raise HTTPException(status_code=400, detail=reason)
 
     async def event_stream():
+        started = time.perf_counter()
+        completed = False
+        capture_analytics("query_started", tenant_id=x_tenant_id, session_id=session_id,
+                          subject_id=body.get("analytics_subject_id"), role=role)
         full_response: list[str] = []
         turn_id = None
         tools_used: list[str] = []
@@ -78,10 +113,15 @@ async def chat(request: Request, x_api_key: str | None = Header(default=None), x
                 elif "chunk" in item:
                     full_response.append(item["chunk"])
                     yield f"data: {json.dumps(item)}\n\n"
+            completed = bool("".join(full_response).strip())
         except Exception:
             audit_event("agent_turn_failed", {"turn_id": turn_id or "unknown", "tenant_id": x_tenant_id})
             yield f"data: {json.dumps({'error': 'agent request failed'})}\n\n"
         finally:
+            capture_analytics("query_completed" if completed else "query_failed",
+                              tenant_id=x_tenant_id, session_id=session_id,
+                              subject_id=body.get("analytics_subject_id"), role=role,
+                              latency_ms=(time.perf_counter()-started)*1000)
             if turn_id:
                 log_interaction(turn_id=turn_id, role=role, user_query=query, assistant_response="".join(full_response), tools_used=tools_used)
             yield "data: [DONE]\n\n"
@@ -126,6 +166,7 @@ async def ingest_data(request: Request, x_api_key: str | None = Header(default=N
         from tools.azure_search import upsert_document
         doc_id = upsert_document(text, metadata)
     else:
+        from tools.rag import ingest
         doc_id = ingest(text, metadata)
     audit_event("knowledge_ingested", {"id": doc_id, "tenant_id": x_tenant_id, "source": metadata.get("source", "")})
     return {"status": "ok", "id": doc_id, "provider": RAG_PROVIDER}

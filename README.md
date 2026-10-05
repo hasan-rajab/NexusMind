@@ -12,6 +12,12 @@ The project demonstrates the Microsoft/Azure path for that problem using Microso
 
 ---
 
+## Product analytics and experimentation
+
+The service now includes a SQL/Python analytics warehouse, ordered operational funnels, cohort retention, segmentation, a user-level A/B inference harness and optional pseudonymous `/chat` telemetry. Run `python -m analytics.demo` for an explicitly **synthetic** case study: 2,611 events from 800 simulated users, with confidence intervals, sample-ratio checks, latency/cost guardrails and a filterable dashboard. Import real pseudonymous CSVs using the same pipeline.
+
+See [metric definitions and the case study](docs/PRODUCT_ANALYTICS.md), [SQL models](analytics/sql/models.sql), and [labelled demo report](docs/analytics/synthetic_demo_report.json). The simulated lift is not a customer or revenue claim.
+
 ## Executive view
 
 | Enterprise need | NexusMind response |
@@ -194,3 +200,17 @@ Production hardening would include:
 - SLOs, incident response and cost monitoring.
 
 NexusMind is best read as evidence of **forward-deployed AI architecture and governed Microsoft-enterprise integration**, not a claim that an autonomous production agent has already been deployed.
+
+
+## Production deployment
+
+Deployment configuration and launch requirements are documented in [docs/PRODUCTION.md](docs/PRODUCTION.md). The deployment has not yet been verified live.
+# Public portfolio
+
+[Explore the portfolio](https://nexusmind-production-3da9.up.railway.app/portfolio) ·
+[Try the public AI guide](https://nexusmind-production-3da9.up.railway.app/demo) ·
+[Explore product analytics](https://nexusmind-production-3da9.up.railway.app/demo/analytics)
+
+Visitors need no owner API key. The guide uses fixed public case studies; the analytics lab labels
+its 800-subject experiment as synthetic and separates opt-in live visitor counts. SQL/warehouse
+reproduction, boundaries and evaluation scope: [PUBLIC_PORTFOLIO.md](docs/PUBLIC_PORTFOLIO.md).

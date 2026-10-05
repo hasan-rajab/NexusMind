@@ -1,0 +1,4 @@
+# Offline analytics build only; kept outside the serving image.
+dbt-core==1.10.15
+dbt-duckdb==1.10.0
+duckdb==1.4.1

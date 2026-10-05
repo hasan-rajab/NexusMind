@@ -10,7 +10,7 @@ import os
 import uuid
 from datetime import datetime
 
-LOG_DIR          = os.environ.get("NEXUSMIND_LOG_DIR", "/kaggle/working/nexusmind_logs")
+LOG_DIR          = os.environ.get("NEXUSMIND_LOG_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "logs"))
 INTERACTIONS_LOG = os.path.join(LOG_DIR, "interactions.jsonl")
 WEAKNESSES_LOG   = os.path.join(LOG_DIR, "weaknesses.jsonl")
 
@@ -113,3 +113,4 @@ def load_interactions(limit: int = 100) -> list[dict]:
             except Exception:
                 pass
     return records[-limit:]
+

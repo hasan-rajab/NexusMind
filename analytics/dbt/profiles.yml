@@ -1,0 +1,7 @@
+nexus_product_analytics:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: warehouse.duckdb
+      threads: 1

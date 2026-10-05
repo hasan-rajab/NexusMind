@@ -37,7 +37,7 @@ def redact_secrets(value: str) -> str:
 
 def verify_api_key(candidate: str | None) -> bool:
     if not NEXUSMIND_API_KEY:
-        return True
+        return False
     return bool(candidate) and hmac.compare_digest(candidate, NEXUSMIND_API_KEY)
 
 

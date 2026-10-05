@@ -2,22 +2,21 @@ import os
 import uuid
 from typing import Optional
 
-import chromadb
-from chromadb.utils import embedding_functions
-
 from config import CHROMA_PERSIST, EMBEDDING_MODEL, RAG_TOP_K
 
-_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name=EMBEDDING_MODEL)
-_chroma: Optional[chromadb.PersistentClient] = None
+_chroma = None
 _collection = None
 
 
 def _get_collection():
     global _chroma, _collection
     if _collection is None:
+        import chromadb
+        from chromadb.utils import embedding_functions
+        embedding = embedding_functions.SentenceTransformerEmbeddingFunction(model_name=EMBEDDING_MODEL)
         os.makedirs(CHROMA_PERSIST, exist_ok=True)
         _chroma = chromadb.PersistentClient(path=CHROMA_PERSIST)
-        _collection = _chroma.get_or_create_collection(name="nexusmind_enterprise_knowledge", embedding_function=_ef, metadata={"hnsw:space": "cosine"})
+        _collection = _chroma.get_or_create_collection(name="nexusmind_enterprise_knowledge", embedding_function=embedding, metadata={"hnsw:space": "cosine"})
     return _collection
 
 

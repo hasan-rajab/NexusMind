@@ -1,0 +1,25 @@
+name: Production image
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build full provider and retrieval image
+        run: docker build -t nexusmind-production:ci .
+      - name: Verify missing credentials block production startup
+        run: |
+          python - <<'PY'
+          import subprocess
+          result = subprocess.run(['docker', 'run', '--rm', 'nexusmind-production:ci'], capture_output=True, text=True, timeout=30)
+          assert result.returncode != 0
+          assert 'Production configuration rejected' in result.stderr
+          print('Production startup correctly refuses missing credentials.')
+          PY
+      - name: Test initialization, authentication and real retrieval
+        run: python ops/smoke.py
