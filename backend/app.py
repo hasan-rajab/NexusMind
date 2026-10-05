@@ -4,9 +4,12 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+from analytics.telemetry import capture as capture_analytics
 
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -64,6 +67,10 @@ async def chat(request: Request, x_api_key: str | None = Header(default=None), x
         raise HTTPException(status_code=400, detail=reason)
 
     async def event_stream():
+        started = time.perf_counter()
+        completed = False
+        capture_analytics("query_started", tenant_id=x_tenant_id, session_id=session_id,
+                          subject_id=body.get("analytics_subject_id"), role=role)
         full_response: list[str] = []
         turn_id = None
         tools_used: list[str] = []
@@ -78,10 +85,15 @@ async def chat(request: Request, x_api_key: str | None = Header(default=None), x
                 elif "chunk" in item:
                     full_response.append(item["chunk"])
                     yield f"data: {json.dumps(item)}\n\n"
+            completed = bool("".join(full_response).strip())
         except Exception:
             audit_event("agent_turn_failed", {"turn_id": turn_id or "unknown", "tenant_id": x_tenant_id})
             yield f"data: {json.dumps({'error': 'agent request failed'})}\n\n"
         finally:
+            capture_analytics("query_completed" if completed else "query_failed",
+                              tenant_id=x_tenant_id, session_id=session_id,
+                              subject_id=body.get("analytics_subject_id"), role=role,
+                              latency_ms=(time.perf_counter()-started)*1000)
             if turn_id:
                 log_interaction(turn_id=turn_id, role=role, user_query=query, assistant_response="".join(full_response), tools_used=tools_used)
             yield "data: [DONE]\n\n"
@@ -162,3 +174,4 @@ async def semantic_kernel_agent(request: Request, x_api_key: str | None = Header
     if not ok:
         raise HTTPException(status_code=400, detail=reason)
     return {"framework": "semantic-kernel", "result": await run_semantic_kernel_agent(task)}
+

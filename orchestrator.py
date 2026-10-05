@@ -25,8 +25,6 @@ from memory import append_message, get_memory
 from providers.llm import chat_completion
 from roles import get_system_prompt
 from tools.enterprise_api import enterprise_api_get
-from tools.rag import retrieve_user_data
-from tools.web_search import web_search
 
 TOOLS = [
     {
@@ -72,11 +70,13 @@ def _retrieve(query: str, role: str, tenant_id: str) -> str:
     if RAG_PROVIDER == "azure_search":
         from tools.azure_search import retrieve
         return retrieve(query=query, role=role, tenant_id=tenant_id)
+    from tools.rag import retrieve_user_data
     return retrieve_user_data(query=query, role=role, tenant_id=tenant_id)
 
 
 def _execute_tool(name: str, args: dict, active_role: str, tenant_id: str) -> str:
     if name == "web_search":
+        from tools.web_search import web_search
         return web_search(args["query"])
     if name == "retrieve_enterprise_knowledge":
         # Never accept a role from model-generated tool arguments. Retrieval
@@ -136,3 +136,4 @@ async def stream(query: str, role: str, history: list[dict], session_id: str | N
     append_message(session_id, "user", query)
     append_message(session_id, "assistant", final_response)
     audit_event("agent_turn_completed", {"turn_id": turn_id, "session_id": session_id, "role": role, "tenant_id": tenant_id, "tools_used": tools_used, "response_chars": len(final_response)})
+

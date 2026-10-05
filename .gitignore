@@ -11,3 +11,9 @@ data/
 *.log
 coverage.xml
 htmlcov/
+
+
+# Local analytics events may contain pseudonymous operational identifiers.
+reports/
+*.sqlite
+*.sqlite-*

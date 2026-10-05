@@ -1,0 +1,342 @@
+{
+  "variant_guardrails": [
+    {
+      "variant": "A",
+      "query_attempts": 285,
+      "completed": 265,
+      "failures": 20,
+      "failure_rate": 0.07017543859649122,
+      "completed_latency_p95_ms": 3073.8799999999997,
+      "completed_latency_observations": 265,
+      "completed_latency_missing": 0,
+      "attempts_with_cost": 285,
+      "finished_attempts_missing_cost": 0,
+      "cost_usd_per_completed_response": 0.0064528301886792455
+    },
+    {
+      "variant": "B",
+      "query_attempts": 343,
+      "completed": 335,
+      "failures": 8,
+      "failure_rate": 0.023323615160349854,
+      "completed_latency_p95_ms": 3693.7200000000003,
+      "completed_latency_observations": 335,
+      "completed_latency_missing": 0,
+      "attempts_with_cost": 343,
+      "finished_attempts_missing_cost": 0,
+      "cost_usd_per_completed_response": 0.012286567164179104
+    }
+  ],
+  "provenance": "SYNTHETIC DEMO: 800 simulated subjects; seed 42; no customer/business outcome",
+  "as_of": "2026-10-02T00:00:00+00:00",
+  "source_sha256": "245b7b2a52bd681b9cb410877f29162f54511bfd2890885adaf2d46ca5b03cc6",
+  "window_minutes": 60.0,
+  "unique_events": 2611,
+  "unique_subjects": 800,
+  "funnel": {
+    "sessions": 985,
+    "eligible_sessions": 984,
+    "queried": 812,
+    "completed": 784,
+    "excluded_immature_sessions": 1,
+    "completion_rate": 0.7967479674796748,
+    "query_rate": 0.8252032520325203
+  },
+  "segments": [
+    {
+      "segment": "mobile",
+      "sessions": 505,
+      "queried": 396,
+      "completed": 384,
+      "query_rate": 0.7841584158415842,
+      "completion_rate": 0.7603960396039604,
+      "query_to_completion_rate": 0.9696969696969697
+    },
+    {
+      "segment": "web",
+      "sessions": 479,
+      "queried": 416,
+      "completed": 400,
+      "query_rate": 0.8684759916492694,
+      "completion_rate": 0.8350730688935282,
+      "query_to_completion_rate": 0.9615384615384616
+    }
+  ],
+  "daily": [
+    {
+      "cohort_day": "2026-09-01",
+      "sessions": 36,
+      "completed": 30,
+      "completion_rate": 0.8333333333333334,
+      "change_vs_previous_observed_day_pp": null
+    },
+    {
+      "cohort_day": "2026-09-02",
+      "sessions": 23,
+      "completed": 14,
+      "completion_rate": 0.6086956521739131,
+      "change_vs_previous_observed_day_pp": -22.463768115942027
+    },
+    {
+      "cohort_day": "2026-09-03",
+      "sessions": 28,
+      "completed": 25,
+      "completion_rate": 0.8928571428571429,
+      "change_vs_previous_observed_day_pp": 28.416149068322984
+    },
+    {
+      "cohort_day": "2026-09-04",
+      "sessions": 34,
+      "completed": 24,
+      "completion_rate": 0.7058823529411765,
+      "change_vs_previous_observed_day_pp": -18.69747899159664
+    },
+    {
+      "cohort_day": "2026-09-05",
+      "sessions": 39,
+      "completed": 29,
+      "completion_rate": 0.7435897435897436,
+      "change_vs_previous_observed_day_pp": 3.7707390648567096
+    },
+    {
+      "cohort_day": "2026-09-06",
+      "sessions": 31,
+      "completed": 20,
+      "completion_rate": 0.6451612903225806,
+      "change_vs_previous_observed_day_pp": -9.842845326716299
+    },
+    {
+      "cohort_day": "2026-09-07",
+      "sessions": 47,
+      "completed": 38,
+      "completion_rate": 0.8085106382978723,
+      "change_vs_previous_observed_day_pp": 16.334934797529165
+    },
+    {
+      "cohort_day": "2026-09-08",
+      "sessions": 46,
+      "completed": 37,
+      "completion_rate": 0.8043478260869565,
+      "change_vs_previous_observed_day_pp": -0.4162812210915745
+    },
+    {
+      "cohort_day": "2026-09-09",
+      "sessions": 30,
+      "completed": 23,
+      "completion_rate": 0.7666666666666667,
+      "change_vs_previous_observed_day_pp": -3.7681159420289823
+    },
+    {
+      "cohort_day": "2026-09-10",
+      "sessions": 36,
+      "completed": 25,
+      "completion_rate": 0.6944444444444444,
+      "change_vs_previous_observed_day_pp": -7.22222222222223
+    },
+    {
+      "cohort_day": "2026-09-11",
+      "sessions": 38,
+      "completed": 32,
+      "completion_rate": 0.8421052631578947,
+      "change_vs_previous_observed_day_pp": 14.766081871345026
+    },
+    {
+      "cohort_day": "2026-09-12",
+      "sessions": 39,
+      "completed": 28,
+      "completion_rate": 0.717948717948718,
+      "change_vs_previous_observed_day_pp": -12.415654520917673
+    },
+    {
+      "cohort_day": "2026-09-13",
+      "sessions": 51,
+      "completed": 41,
+      "completion_rate": 0.803921568627451,
+      "change_vs_previous_observed_day_pp": 8.597285067873306
+    },
+    {
+      "cohort_day": "2026-09-14",
+      "sessions": 40,
+      "completed": 30,
+      "completion_rate": 0.75,
+      "change_vs_previous_observed_day_pp": -5.392156862745101
+    },
+    {
+      "cohort_day": "2026-09-15",
+      "sessions": 48,
+      "completed": 36,
+      "completion_rate": 0.75,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-16",
+      "sessions": 36,
+      "completed": 29,
+      "completion_rate": 0.8055555555555556,
+      "change_vs_previous_observed_day_pp": 5.555555555555558
+    },
+    {
+      "cohort_day": "2026-09-17",
+      "sessions": 31,
+      "completed": 28,
+      "completion_rate": 0.9032258064516129,
+      "change_vs_previous_observed_day_pp": 9.76702508960573
+    },
+    {
+      "cohort_day": "2026-09-18",
+      "sessions": 46,
+      "completed": 37,
+      "completion_rate": 0.8043478260869565,
+      "change_vs_previous_observed_day_pp": -9.887798036465634
+    },
+    {
+      "cohort_day": "2026-09-19",
+      "sessions": 47,
+      "completed": 37,
+      "completion_rate": 0.7872340425531915,
+      "change_vs_previous_observed_day_pp": -1.7113783533765026
+    },
+    {
+      "cohort_day": "2026-09-20",
+      "sessions": 33,
+      "completed": 28,
+      "completion_rate": 0.8484848484848485,
+      "change_vs_previous_observed_day_pp": 6.125080593165699
+    },
+    {
+      "cohort_day": "2026-09-21",
+      "sessions": 47,
+      "completed": 40,
+      "completion_rate": 0.851063829787234,
+      "change_vs_previous_observed_day_pp": 0.2578981302385541
+    },
+    {
+      "cohort_day": "2026-09-22",
+      "sessions": 48,
+      "completed": 38,
+      "completion_rate": 0.7916666666666666,
+      "change_vs_previous_observed_day_pp": -5.939716312056742
+    },
+    {
+      "cohort_day": "2026-09-23",
+      "sessions": 38,
+      "completed": 29,
+      "completion_rate": 0.7631578947368421,
+      "change_vs_previous_observed_day_pp": -2.8508771929824483
+    },
+    {
+      "cohort_day": "2026-09-24",
+      "sessions": 35,
+      "completed": 29,
+      "completion_rate": 0.8285714285714286,
+      "change_vs_previous_observed_day_pp": 6.541353383458648
+    },
+    {
+      "cohort_day": "2026-09-25",
+      "sessions": 10,
+      "completed": 10,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 17.14285714285714
+    },
+    {
+      "cohort_day": "2026-09-26",
+      "sessions": 4,
+      "completed": 4,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-27",
+      "sessions": 9,
+      "completed": 9,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-28",
+      "sessions": 7,
+      "completed": 7,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-29",
+      "sessions": 9,
+      "completed": 9,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-30",
+      "sessions": 11,
+      "completed": 11,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-10-01",
+      "sessions": 7,
+      "completed": 7,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    }
+  ],
+  "day7_retention": {
+    "eligible_subjects": 773,
+    "returned_subjects": 177,
+    "retention_rate": 0.22897800776196636
+  },
+  "experiment": {
+    "status": "ok",
+    "experimental_unit": "subject",
+    "subjects_a": 391,
+    "subjects_b": 409,
+    "completed_a": 265,
+    "completed_b": 335,
+    "rate_a": 0.6777493606138107,
+    "rate_b": 0.8190709046454768,
+    "absolute_lift_pp": 14.132154403166608,
+    "relative_lift_pct": 20.851593855238278,
+    "absolute_lift_ci95_pp": [
+      8.141256363833543,
+      20.019239666987627
+    ],
+    "two_sided_permutation_pvalue": 0.0003999200159968006,
+    "srm_pvalue": 0.5478395477488612,
+    "srm_expected_allocation": "50:50 Bernoulli",
+    "seed": 42,
+    "permutations": 5000,
+    "primary_metric": "completion within the fixed session window",
+    "decision": "demo/analysis result only; deployment needs real randomized exposure and guardrails"
+  },
+  "guardrails": {
+    "query_attempts": 813,
+    "query_completions": 785,
+    "query_failures": 28,
+    "failure_rate": 0.03444034440344403,
+    "completed_latency_observations": 785,
+    "completed_latency_missing": 0,
+    "completed_latency_p95_ms": 3408.8399999999997
+  },
+  "notes": [
+    "Funnel steps are ordered and bounded by the configured window; immature sessions are excluded.",
+    "A/B inference counts independent subjects once, including subjects who never complete.",
+    "Synthetic demo lift is not a measured customer, revenue or deployment outcome.",
+    "Imported observational A/B labels do not establish randomization; verify allocation and exposure.",
+    "Latency covers completed queries; failures and missing latency are reported separately."
+  ],
+  "generator": {
+    "seed": 42,
+    "subjects": 800,
+    "assignment": "50:50 independent Bernoulli",
+    "query_probability_a": 0.78,
+    "query_probability_b": 0.86,
+    "mobile_probability_adjustment": -0.08,
+    "query_failure_probability_a": 0.08,
+    "query_failure_probability_b": 0.04,
+    "cost_usd_per_attempt_a": 0.006,
+    "cost_usd_per_attempt_b": 0.012,
+    "b_latency_multiplier": 1.2,
+    "return_probability": 0.24
+  }
+}

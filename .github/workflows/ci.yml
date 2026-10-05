@@ -19,10 +19,21 @@ jobs:
       - name: Install lightweight test dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest httpx
+          pip install pytest httpx fastapi
       - name: Compile Python sources
         run: python -m compileall -q .
       - name: Run governance and orchestration unit tests
         env:
           PYTHONPATH: .
-        run: python -m pytest -q tests/test_governance.py tests/test_memory.py tests/test_enterprise_api.py
+        run: python -m pytest -q tests/test_governance.py tests/test_memory.py tests/test_enterprise_api.py tests/test_analytics.py tests/test_analytics_api.py tests/test_retrieval_scope.py
+
+      - name: Generate deterministic synthetic analytics evidence
+        run: python -m analytics.demo
+      - name: Upload labelled demo report and dashboard
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-analytics-demo-python-${{ matrix.python-version }}
+          path: |
+            reports/analytics_demo/report.json
+            reports/analytics_demo/dashboard.html
+            reports/analytics_demo/mart_*.csv
