@@ -21,3 +21,5 @@ jobs:
           assert 'Production configuration rejected' in result.stderr
           print('Production startup correctly refuses missing credentials.')
           PY
+      - name: Test initialization, authentication and real retrieval
+        run: python ops/smoke.py
