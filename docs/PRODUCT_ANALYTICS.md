@@ -70,6 +70,8 @@ python -m analytics.telemetry --database private/live.sqlite --out private/event
 python -m analytics.pipeline --events private/events.csv --as-of 2026-10-05T00:00:00Z
 ```
 
+The existing interaction logger now defaults to the repository `data/logs` directory and still respects `NEXUSMIND_LOG_DIR`; importing the API no longer assumes a writable Kaggle filesystem. Interaction logs are separate from the content-free analytics store.
+
 Use a different database for the offline snapshot so the ETL refresh does not overwrite ongoing capture. Keep operational telemetry out of Git; generated local reports/databases are ignored. Existing API access controls and retrieval-role checks remain tested.
 
 Defensible CV wording: “Built a SQL/Python product-analytics warehouse with ordered funnels, cohort retention, segmentation and user-level A/B inference; validated on 2,611 labelled synthetic events from 800 simulated users and integrated optional pseudonymous service telemetry.” Do not describe the simulated lift as a customer/business outcome.
