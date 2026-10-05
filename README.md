@@ -205,3 +205,12 @@ NexusMind is best read as evidence of **forward-deployed AI architecture and gov
 ## Production deployment
 
 Deployment configuration and launch requirements are documented in [docs/PRODUCTION.md](docs/PRODUCTION.md). The deployment has not yet been verified live.
+# Public portfolio
+
+[Explore the portfolio](https://nexusmind-production-3da9.up.railway.app/portfolio) ·
+[Try the public AI guide](https://nexusmind-production-3da9.up.railway.app/demo) ·
+[Explore product analytics](https://nexusmind-production-3da9.up.railway.app/demo/analytics)
+
+Visitors need no owner API key. The guide uses fixed public case studies; the analytics lab labels
+its 800-subject experiment as synthetic and separates opt-in live visitor counts. SQL/warehouse
+reproduction, boundaries and evaluation scope: [PUBLIC_PORTFOLIO.md](docs/PUBLIC_PORTFOLIO.md).

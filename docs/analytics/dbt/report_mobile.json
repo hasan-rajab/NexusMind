@@ -1,0 +1,333 @@
+{
+  "variant_guardrails": [
+    {
+      "variant": "A",
+      "query_attempts": 131,
+      "completed": 122,
+      "failures": 9,
+      "failure_rate": 0.06870229007633588,
+      "completed_latency_p95_ms": 3044.2799999999997,
+      "completed_latency_observations": 122,
+      "completed_latency_missing": 0,
+      "attempts_with_cost": 131,
+      "finished_attempts_missing_cost": 0,
+      "cost_usd_per_completed_response": 0.006442622950819672
+    },
+    {
+      "variant": "B",
+      "query_attempts": 166,
+      "completed": 163,
+      "failures": 3,
+      "failure_rate": 0.018072289156626505,
+      "completed_latency_p95_ms": 3674.1,
+      "completed_latency_observations": 163,
+      "completed_latency_missing": 0,
+      "attempts_with_cost": 166,
+      "finished_attempts_missing_cost": 0,
+      "cost_usd_per_completed_response": 0.012220858895705521
+    }
+  ],
+  "provenance": "SYNTHETIC DEMO: 800 simulated subjects; seed 42; no customer/business outcome",
+  "as_of": "2026-10-02T00:00:00+00:00",
+  "source_sha256": "245b7b2a52bd681b9cb410877f29162f54511bfd2890885adaf2d46ca5b03cc6",
+  "window_minutes": 60.0,
+  "unique_events": 1300,
+  "unique_subjects": 406,
+  "funnel": {
+    "sessions": 506,
+    "eligible_sessions": 505,
+    "queried": 396,
+    "completed": 384,
+    "excluded_immature_sessions": 1,
+    "completion_rate": 0.7603960396039604,
+    "query_rate": 0.7841584158415842
+  },
+  "segments": [
+    {
+      "segment": "mobile",
+      "sessions": 505,
+      "queried": 396,
+      "completed": 384,
+      "query_rate": 0.7841584158415842,
+      "completion_rate": 0.7603960396039604,
+      "query_to_completion_rate": 0.9696969696969697
+    }
+  ],
+  "daily": [
+    {
+      "cohort_day": "2026-09-01",
+      "sessions": 17,
+      "completed": 14,
+      "completion_rate": 0.8235294117647058,
+      "change_vs_previous_observed_day_pp": null
+    },
+    {
+      "cohort_day": "2026-09-02",
+      "sessions": 10,
+      "completed": 4,
+      "completion_rate": 0.4,
+      "change_vs_previous_observed_day_pp": -42.35294117647058
+    },
+    {
+      "cohort_day": "2026-09-03",
+      "sessions": 10,
+      "completed": 9,
+      "completion_rate": 0.9,
+      "change_vs_previous_observed_day_pp": 50.0
+    },
+    {
+      "cohort_day": "2026-09-04",
+      "sessions": 18,
+      "completed": 14,
+      "completion_rate": 0.7777777777777778,
+      "change_vs_previous_observed_day_pp": -12.222222222222223
+    },
+    {
+      "cohort_day": "2026-09-05",
+      "sessions": 22,
+      "completed": 16,
+      "completion_rate": 0.7272727272727273,
+      "change_vs_previous_observed_day_pp": -5.05050505050505
+    },
+    {
+      "cohort_day": "2026-09-06",
+      "sessions": 12,
+      "completed": 6,
+      "completion_rate": 0.5,
+      "change_vs_previous_observed_day_pp": -22.72727272727273
+    },
+    {
+      "cohort_day": "2026-09-07",
+      "sessions": 21,
+      "completed": 14,
+      "completion_rate": 0.6666666666666666,
+      "change_vs_previous_observed_day_pp": 16.666666666666664
+    },
+    {
+      "cohort_day": "2026-09-08",
+      "sessions": 19,
+      "completed": 16,
+      "completion_rate": 0.8421052631578947,
+      "change_vs_previous_observed_day_pp": 17.543859649122805
+    },
+    {
+      "cohort_day": "2026-09-09",
+      "sessions": 15,
+      "completed": 9,
+      "completion_rate": 0.6,
+      "change_vs_previous_observed_day_pp": -24.210526315789473
+    },
+    {
+      "cohort_day": "2026-09-10",
+      "sessions": 19,
+      "completed": 15,
+      "completion_rate": 0.7894736842105263,
+      "change_vs_previous_observed_day_pp": 18.947368421052634
+    },
+    {
+      "cohort_day": "2026-09-11",
+      "sessions": 20,
+      "completed": 17,
+      "completion_rate": 0.85,
+      "change_vs_previous_observed_day_pp": 6.052631578947365
+    },
+    {
+      "cohort_day": "2026-09-12",
+      "sessions": 22,
+      "completed": 16,
+      "completion_rate": 0.7272727272727273,
+      "change_vs_previous_observed_day_pp": -12.272727272727268
+    },
+    {
+      "cohort_day": "2026-09-13",
+      "sessions": 24,
+      "completed": 19,
+      "completion_rate": 0.7916666666666666,
+      "change_vs_previous_observed_day_pp": 6.439393939393934
+    },
+    {
+      "cohort_day": "2026-09-14",
+      "sessions": 24,
+      "completed": 15,
+      "completion_rate": 0.625,
+      "change_vs_previous_observed_day_pp": -16.666666666666664
+    },
+    {
+      "cohort_day": "2026-09-15",
+      "sessions": 29,
+      "completed": 20,
+      "completion_rate": 0.6896551724137931,
+      "change_vs_previous_observed_day_pp": 6.465517241379315
+    },
+    {
+      "cohort_day": "2026-09-16",
+      "sessions": 20,
+      "completed": 15,
+      "completion_rate": 0.75,
+      "change_vs_previous_observed_day_pp": 6.034482758620685
+    },
+    {
+      "cohort_day": "2026-09-17",
+      "sessions": 19,
+      "completed": 16,
+      "completion_rate": 0.8421052631578947,
+      "change_vs_previous_observed_day_pp": 9.210526315789469
+    },
+    {
+      "cohort_day": "2026-09-18",
+      "sessions": 26,
+      "completed": 20,
+      "completion_rate": 0.7692307692307693,
+      "change_vs_previous_observed_day_pp": -7.287449392712542
+    },
+    {
+      "cohort_day": "2026-09-19",
+      "sessions": 26,
+      "completed": 18,
+      "completion_rate": 0.6923076923076923,
+      "change_vs_previous_observed_day_pp": -7.692307692307699
+    },
+    {
+      "cohort_day": "2026-09-20",
+      "sessions": 19,
+      "completed": 17,
+      "completion_rate": 0.8947368421052632,
+      "change_vs_previous_observed_day_pp": 20.24291497975709
+    },
+    {
+      "cohort_day": "2026-09-21",
+      "sessions": 22,
+      "completed": 18,
+      "completion_rate": 0.8181818181818182,
+      "change_vs_previous_observed_day_pp": -7.655502392344493
+    },
+    {
+      "cohort_day": "2026-09-22",
+      "sessions": 21,
+      "completed": 16,
+      "completion_rate": 0.7619047619047619,
+      "change_vs_previous_observed_day_pp": -5.627705627705637
+    },
+    {
+      "cohort_day": "2026-09-23",
+      "sessions": 22,
+      "completed": 16,
+      "completion_rate": 0.7272727272727273,
+      "change_vs_previous_observed_day_pp": -3.463203463203457
+    },
+    {
+      "cohort_day": "2026-09-24",
+      "sessions": 19,
+      "completed": 15,
+      "completion_rate": 0.7894736842105263,
+      "change_vs_previous_observed_day_pp": 6.2200956937799035
+    },
+    {
+      "cohort_day": "2026-09-25",
+      "sessions": 5,
+      "completed": 5,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 21.052631578947366
+    },
+    {
+      "cohort_day": "2026-09-26",
+      "sessions": 4,
+      "completed": 4,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-27",
+      "sessions": 5,
+      "completed": 5,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-28",
+      "sessions": 5,
+      "completed": 5,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-29",
+      "sessions": 2,
+      "completed": 2,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-09-30",
+      "sessions": 5,
+      "completed": 5,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    },
+    {
+      "cohort_day": "2026-10-01",
+      "sessions": 3,
+      "completed": 3,
+      "completion_rate": 1.0,
+      "change_vs_previous_observed_day_pp": 0.0
+    }
+  ],
+  "day7_retention": {
+    "eligible_subjects": 390,
+    "returned_subjects": 96,
+    "retention_rate": 0.24615384615384617
+  },
+  "experiment": {
+    "status": "ok",
+    "experimental_unit": "subject",
+    "subjects_a": 198,
+    "subjects_b": 208,
+    "completed_a": 122,
+    "completed_b": 163,
+    "rate_a": 0.6161616161616161,
+    "rate_b": 0.7836538461538461,
+    "absolute_lift_pp": 16.749222999223,
+    "relative_lift_pct": 27.18316519546028,
+    "absolute_lift_ci95_pp": [
+      7.852972299517479,
+      25.32957243597397
+    ],
+    "two_sided_permutation_pvalue": 0.0001999600079984003,
+    "srm_pvalue": 0.6551719962737365,
+    "srm_expected_allocation": "50:50 Bernoulli",
+    "seed": 42,
+    "permutations": 5000,
+    "primary_metric": "completion within the fixed session window",
+    "decision": "demo/analysis result only; deployment needs real randomized exposure and guardrails"
+  },
+  "guardrails": {
+    "query_attempts": 397,
+    "query_completions": 385,
+    "query_failures": 12,
+    "failure_rate": 0.030226700251889168,
+    "completed_latency_observations": 385,
+    "completed_latency_missing": 0,
+    "completed_latency_p95_ms": 3408.8399999999997
+  },
+  "notes": [
+    "Funnel steps are ordered and bounded by the configured window; immature sessions are excluded.",
+    "A/B inference counts independent subjects once, including subjects who never complete.",
+    "Synthetic demo lift is not a measured customer, revenue or deployment outcome.",
+    "Imported observational A/B labels do not establish randomization; verify allocation and exposure.",
+    "Latency covers completed queries; failures and missing latency are reported separately."
+  ],
+  "segment": "mobile",
+  "arm_ci95": {
+    "a": [
+      0.5468233813665888,
+      0.6810782611837858
+    ],
+    "b": [
+      0.7228249315632773,
+      0.8341954017411539
+    ]
+  },
+  "funnel_sql": "-- Non-converters must stay in the denominator: LEFT JOIN, not INNER JOIN.\nwith ranked_starts as (\n    select *, row_number() over(partition by session_id order by event_ts, event_id) as rn\n    from {{ ref('stg_events') }} where event_name='session_started'\n), starts as (\n    select event_id, subject_id, session_id, event_ts, segment, variant,\n           epoch(cast('{{ var(\"analysis_cutoff\") }}' as timestamptz))::bigint as as_of,\n           {{ var('window_seconds') }} as window_seconds\n    from ranked_starts where rn=1\n), queries as (\n    select s.*, min(q.event_ts) as first_query_at\n    from starts s left join {{ ref('stg_events') }} q\n      on q.session_id=s.session_id and q.event_name='query_started'\n      and q.event_ts between s.event_ts and least(s.event_ts+s.window_seconds,s.as_of)\n    group by all\n), completions as (\n    select q.*, min(c.event_ts) as first_completion_at\n    from queries q left join {{ ref('stg_events') }} c\n      on c.session_id=q.session_id and c.event_name='query_completed'\n      and c.event_ts between q.first_query_at and least(q.event_ts+q.window_seconds,q.as_of)\n    group by all\n)\nselect session_id, subject_id, event_ts as cohort_ts,\n       cast(to_timestamp(event_ts) at time zone 'UTC' as date) as cohort_day,\n       segment, variant, (event_ts <= as_of-window_seconds)::integer as matured,\n       first_query_at, first_completion_at,\n       (first_query_at is not null)::integer as queried,\n       (first_completion_at is not null)::integer as converted\nfrom completions\n",
+  "warehouse": "DuckDB 1.4.1; dbt-duckdb 1.10.0",
+  "validation": "dbt build data tests passed; funnel/subject/segment/daily equivalence with independent SQLite pipeline passed"
+}

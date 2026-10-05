@@ -17,3 +17,7 @@ htmlcov/
 reports/
 *.sqlite
 *.sqlite-*
+analytics/dbt/target/
+analytics/dbt/logs/
+analytics/dbt/warehouse.duckdb*
+analytics/dbt/seeds/demo_events.csv

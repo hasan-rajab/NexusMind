@@ -1,0 +1,28 @@
+name: nexus_product_analytics
+version: '1.0.0'
+config-version: 2
+profile: nexus_product_analytics
+model-paths: [models]
+seed-paths: [seeds]
+test-paths: [tests]
+target-path: target
+clean-targets: [target, dbt_packages]
+vars:
+  analysis_cutoff: '2026-10-02T00:00:00Z'
+  window_seconds: 3600
+models:
+  nexus_product_analytics:
+    +materialized: table
+seeds:
+  nexus_product_analytics:
+    demo_events:
+      +column_types:
+        event_id: varchar
+        subject_id: varchar
+        session_id: varchar
+        timestamp: varchar
+        event_name: varchar
+        segment: varchar
+        variant: varchar
+        latency_ms: double
+        cost_usd: double

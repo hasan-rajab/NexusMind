@@ -22,6 +22,7 @@ from governance import audit_event, validate_user_input, verify_api_key
 from logger import flag_weakness, get_stats as log_stats, load_weaknesses, log_interaction
 from memory import clear_memory, stats as memory_stats
 from runtime import validate_production
+from backend import public_demo
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -29,12 +30,14 @@ async def lifespan(app: FastAPI):
     if RAG_PROVIDER == "chroma":
         from tools.rag import get_stats
         get_stats()
+    public_demo.prepare()
     app.state.ready = True
     yield
     app.state.ready = False
 
 
 app = FastAPI(title="NexusMind Enterprise Agentic AI", version="1.0.0", description="Governed enterprise RAG and agentic AI service with Microsoft Foundry, Azure OpenAI, Azure AI Search, multi-agent orchestration and evaluation.", lifespan=lifespan)
+app.include_router(public_demo.router)
 app.add_middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS, allow_methods=["GET", "POST"], allow_headers=["Content-Type", "Authorization", "X-API-Key", "X-Tenant-ID"])
 FRONTEND_PATH = Path(__file__).parent.parent / "frontend" / "index.html"
 

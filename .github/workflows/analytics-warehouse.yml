@@ -1,0 +1,30 @@
+name: Public analytics warehouse
+on:
+  pull_request:
+    paths:
+      - 'analytics/**'
+      - 'scripts/build_analytics.py'
+      - 'requirements-analytics.txt'
+      - '.github/workflows/analytics-warehouse.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-analytics.txt
+      - run: python scripts/build_analytics.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-synthetic-dbt-evidence
+          path: |
+            docs/analytics/dbt
+            analytics/dbt/target/index.html
+            analytics/dbt/target/manifest.json
+            analytics/dbt/target/catalog.json
+            analytics/dbt/target/run_results.json

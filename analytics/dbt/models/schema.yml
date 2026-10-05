@@ -1,0 +1,50 @@
+version: 2
+seeds:
+  - name: demo_events
+    description: "SYNTHETIC 800-subject event fixture. Independently seeded 50:50 Bernoulli assignment. No customers or business outcome."
+models:
+  - name: stg_events
+    description: "Typed UTC event staging; only public synthetic identifiers."
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+      - name: session_id
+        data_tests: [not_null]
+      - name: subject_id
+        data_tests: [not_null]
+      - name: event_name
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['session_started', 'query_started', 'query_completed', 'query_failed', 'feedback_submitted']
+      - name: variant
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['A', 'B']
+  - name: fct_sessions
+    description: "Ordered 60-minute session funnel. Immature windows remain marked for explicit exclusion."
+    columns:
+      - name: session_id
+        data_tests: [unique, not_null]
+  - name: mart_experiment_subjects
+    description: "First-exposure matured subject outcomes. Repeated sessions never increase A/B sample size."
+    columns:
+      - name: subject_id
+        data_tests: [unique, not_null]
+      - name: converted
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+  - name: mart_segments
+    description: "Session-level segment diagnosis; not the independent-subject A/B denominator."
+    columns:
+      - name: segment
+        data_tests: [unique, not_null]
+  - name: mart_daily_conversion
+    description: "UTC daily cohort completion with LAG against the previous observed cohort day."
+    columns:
+      - name: cohort_day
+        data_tests: [unique, not_null]

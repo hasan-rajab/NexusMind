@@ -1,0 +1,1300 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v12.json",
+    "dbt_version": "1.10.15",
+    "generated_at": "2026-10-05T11:43:21.019082Z",
+    "invocation_id": "bfaa48d2-a172-43b8-8c29-f167cef5c3a4",
+    "invocation_started_at": "2026-10-05T11:39:38.861672+00:00",
+    "env": {},
+    "project_name": "nexus_product_analytics",
+    "project_id": "6a301442eeef1c74b006e4cd4f58027c",
+    "user_id": "cd71c4eb-70de-4d24-b66c-08cd947cdd5d",
+    "send_anonymous_usage_stats": true,
+    "adapter_type": "duckdb",
+    "quoting": {
+      "database": true,
+      "schema": true,
+      "identifier": true,
+      "column": null
+    }
+  },
+  "parent_map": {
+    "model.nexus_product_analytics.mart_segments": [
+      "model.nexus_product_analytics.fct_sessions"
+    ],
+    "model.nexus_product_analytics.mart_daily_conversion": [
+      "model.nexus_product_analytics.fct_sessions"
+    ],
+    "model.nexus_product_analytics.fct_sessions": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "model.nexus_product_analytics.mart_experiment_subjects": [
+      "model.nexus_product_analytics.fct_sessions"
+    ],
+    "model.nexus_product_analytics.stg_events": [
+      "seed.nexus_product_analytics.demo_events"
+    ],
+    "test.nexus_product_analytics.session_integrity": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.temporal_integrity": [
+      "model.nexus_product_analytics.fct_sessions"
+    ],
+    "test.nexus_product_analytics.assignment_integrity": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.event_integrity": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "seed.nexus_product_analytics.demo_events": [],
+    "test.nexus_product_analytics.unique_stg_events_event_id.66ebb17438": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.not_null_stg_events_event_id.715b3f7012": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.not_null_stg_events_session_id.e91b448cdc": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.not_null_stg_events_subject_id.80114adbc8": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.accepted_values_stg_events_event_name__session_started__query_started__query_completed__query_failed__feedback_submitted.0611419e9f": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.accepted_values_stg_events_variant__A__B.30e5cb0688": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.unique_fct_sessions_session_id.cb0d4599f3": [
+      "model.nexus_product_analytics.fct_sessions"
+    ],
+    "test.nexus_product_analytics.not_null_fct_sessions_session_id.c09c12e72d": [
+      "model.nexus_product_analytics.fct_sessions"
+    ],
+    "test.nexus_product_analytics.unique_mart_experiment_subjects_subject_id.e41d698aa9": [
+      "model.nexus_product_analytics.mart_experiment_subjects"
+    ],
+    "test.nexus_product_analytics.not_null_mart_experiment_subjects_subject_id.59ae3ab1da": [
+      "model.nexus_product_analytics.mart_experiment_subjects"
+    ],
+    "test.nexus_product_analytics.accepted_values_mart_experiment_subjects_converted__False__0__1.41299c5c56": [
+      "model.nexus_product_analytics.mart_experiment_subjects"
+    ],
+    "test.nexus_product_analytics.unique_mart_segments_segment.504af9474a": [
+      "model.nexus_product_analytics.mart_segments"
+    ],
+    "test.nexus_product_analytics.not_null_mart_segments_segment.557f8df403": [
+      "model.nexus_product_analytics.mart_segments"
+    ],
+    "test.nexus_product_analytics.unique_mart_daily_conversion_cohort_day.d648dce2f5": [
+      "model.nexus_product_analytics.mart_daily_conversion"
+    ],
+    "test.nexus_product_analytics.not_null_mart_daily_conversion_cohort_day.c6479c8eb3": [
+      "model.nexus_product_analytics.mart_daily_conversion"
+    ]
+  },
+  "child_map": {
+    "model.nexus_product_analytics.mart_segments": [
+      "test.nexus_product_analytics.not_null_mart_segments_segment.557f8df403",
+      "test.nexus_product_analytics.unique_mart_segments_segment.504af9474a"
+    ],
+    "model.nexus_product_analytics.mart_daily_conversion": [
+      "test.nexus_product_analytics.not_null_mart_daily_conversion_cohort_day.c6479c8eb3",
+      "test.nexus_product_analytics.unique_mart_daily_conversion_cohort_day.d648dce2f5"
+    ],
+    "model.nexus_product_analytics.fct_sessions": [
+      "model.nexus_product_analytics.mart_daily_conversion",
+      "model.nexus_product_analytics.mart_experiment_subjects",
+      "model.nexus_product_analytics.mart_segments",
+      "test.nexus_product_analytics.not_null_fct_sessions_session_id.c09c12e72d",
+      "test.nexus_product_analytics.temporal_integrity",
+      "test.nexus_product_analytics.unique_fct_sessions_session_id.cb0d4599f3"
+    ],
+    "model.nexus_product_analytics.mart_experiment_subjects": [
+      "test.nexus_product_analytics.accepted_values_mart_experiment_subjects_converted__False__0__1.41299c5c56",
+      "test.nexus_product_analytics.not_null_mart_experiment_subjects_subject_id.59ae3ab1da",
+      "test.nexus_product_analytics.unique_mart_experiment_subjects_subject_id.e41d698aa9"
+    ],
+    "model.nexus_product_analytics.stg_events": [
+      "model.nexus_product_analytics.fct_sessions",
+      "test.nexus_product_analytics.accepted_values_stg_events_event_name__session_started__query_started__query_completed__query_failed__feedback_submitted.0611419e9f",
+      "test.nexus_product_analytics.accepted_values_stg_events_variant__A__B.30e5cb0688",
+      "test.nexus_product_analytics.assignment_integrity",
+      "test.nexus_product_analytics.event_integrity",
+      "test.nexus_product_analytics.not_null_stg_events_event_id.715b3f7012",
+      "test.nexus_product_analytics.not_null_stg_events_session_id.e91b448cdc",
+      "test.nexus_product_analytics.not_null_stg_events_subject_id.80114adbc8",
+      "test.nexus_product_analytics.session_integrity",
+      "test.nexus_product_analytics.unique_stg_events_event_id.66ebb17438"
+    ],
+    "test.nexus_product_analytics.session_integrity": [],
+    "test.nexus_product_analytics.temporal_integrity": [],
+    "test.nexus_product_analytics.assignment_integrity": [],
+    "test.nexus_product_analytics.event_integrity": [],
+    "seed.nexus_product_analytics.demo_events": [
+      "model.nexus_product_analytics.stg_events"
+    ],
+    "test.nexus_product_analytics.unique_stg_events_event_id.66ebb17438": [],
+    "test.nexus_product_analytics.not_null_stg_events_event_id.715b3f7012": [],
+    "test.nexus_product_analytics.not_null_stg_events_session_id.e91b448cdc": [],
+    "test.nexus_product_analytics.not_null_stg_events_subject_id.80114adbc8": [],
+    "test.nexus_product_analytics.accepted_values_stg_events_event_name__session_started__query_started__query_completed__query_failed__feedback_submitted.0611419e9f": [],
+    "test.nexus_product_analytics.accepted_values_stg_events_variant__A__B.30e5cb0688": [],
+    "test.nexus_product_analytics.unique_fct_sessions_session_id.cb0d4599f3": [],
+    "test.nexus_product_analytics.not_null_fct_sessions_session_id.c09c12e72d": [],
+    "test.nexus_product_analytics.unique_mart_experiment_subjects_subject_id.e41d698aa9": [],
+    "test.nexus_product_analytics.not_null_mart_experiment_subjects_subject_id.59ae3ab1da": [],
+    "test.nexus_product_analytics.accepted_values_mart_experiment_subjects_converted__False__0__1.41299c5c56": [],
+    "test.nexus_product_analytics.unique_mart_segments_segment.504af9474a": [],
+    "test.nexus_product_analytics.not_null_mart_segments_segment.557f8df403": [],
+    "test.nexus_product_analytics.unique_mart_daily_conversion_cohort_day.d648dce2f5": [],
+    "test.nexus_product_analytics.not_null_mart_daily_conversion_cohort_day.c6479c8eb3": []
+  },
+  "nodes": {
+    "model.nexus_product_analytics.mart_segments": {
+      "unique_id": "model.nexus_product_analytics.mart_segments",
+      "name": "mart_segments",
+      "resource_type": "model",
+      "description": "Session-level segment diagnosis; not the independent-subject A/B denominator.",
+      "columns": {
+        "segment": {
+          "name": "segment",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        }
+      },
+      "raw_code": "select segment, count(*) as sessions, sum(queried) as queried, sum(converted) as completed,\n       sum(queried)::double/count(*) as query_rate,\n       sum(converted)::double/count(*) as completion_rate,\n       sum(converted)::double/nullif(sum(queried),0) as query_to_completion_rate\nfrom {{ ref('fct_sessions') }} where matured=1 group by segment",
+      "compiled_code": "select segment, count(*) as sessions, sum(queried) as queried, sum(converted) as completed,\n       sum(queried)::double/count(*) as query_rate,\n       sum(converted)::double/count(*) as completion_rate,\n       sum(converted)::double/nullif(sum(queried),0) as query_to_completion_rate\nfrom \"warehouse\".\"main\".\"fct_sessions\" where matured=1 group by segment",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.fct_sessions"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": null,
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "batch_size": null,
+        "lookback": 1,
+        "begin": null,
+        "persist_docs": {},
+        "post-hook": [],
+        "pre-hook": [],
+        "quoting": {},
+        "column_types": {},
+        "full_refresh": null,
+        "unique_key": null,
+        "on_schema_change": "ignore",
+        "on_configuration_change": "apply",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "contract": {
+          "enforced": false,
+          "alias_types": true
+        },
+        "event_time": null,
+        "concurrent_batches": null,
+        "access": "protected",
+        "freshness": null
+      }
+    },
+    "model.nexus_product_analytics.mart_daily_conversion": {
+      "unique_id": "model.nexus_product_analytics.mart_daily_conversion",
+      "name": "mart_daily_conversion",
+      "resource_type": "model",
+      "description": "UTC daily cohort completion with LAG against the previous observed cohort day.",
+      "columns": {
+        "cohort_day": {
+          "name": "cohort_day",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        }
+      },
+      "raw_code": "with daily as (\n    select cohort_day, count(*) as sessions, sum(converted) as completed,\n           sum(converted)::double/count(*) as completion_rate\n    from {{ ref('fct_sessions') }} where matured=1 group by cohort_day\n)\nselect *, 100*(completion_rate-lag(completion_rate) over(order by cohort_day))\n       as change_vs_previous_observed_day_pp\nfrom daily",
+      "compiled_code": "with daily as (\n    select cohort_day, count(*) as sessions, sum(converted) as completed,\n           sum(converted)::double/count(*) as completion_rate\n    from \"warehouse\".\"main\".\"fct_sessions\" where matured=1 group by cohort_day\n)\nselect *, 100*(completion_rate-lag(completion_rate) over(order by cohort_day))\n       as change_vs_previous_observed_day_pp\nfrom daily",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.fct_sessions"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": null,
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "batch_size": null,
+        "lookback": 1,
+        "begin": null,
+        "persist_docs": {},
+        "post-hook": [],
+        "pre-hook": [],
+        "quoting": {},
+        "column_types": {},
+        "full_refresh": null,
+        "unique_key": null,
+        "on_schema_change": "ignore",
+        "on_configuration_change": "apply",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "contract": {
+          "enforced": false,
+          "alias_types": true
+        },
+        "event_time": null,
+        "concurrent_batches": null,
+        "access": "protected",
+        "freshness": null
+      }
+    },
+    "model.nexus_product_analytics.fct_sessions": {
+      "unique_id": "model.nexus_product_analytics.fct_sessions",
+      "name": "fct_sessions",
+      "resource_type": "model",
+      "description": "Ordered 60-minute session funnel. Immature windows remain marked for explicit exclusion.",
+      "columns": {
+        "session_id": {
+          "name": "session_id",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        }
+      },
+      "raw_code": "-- Non-converters must stay in the denominator: LEFT JOIN, not INNER JOIN.\nwith ranked_starts as (\n    select *, row_number() over(partition by session_id order by event_ts, event_id) as rn\n    from {{ ref('stg_events') }} where event_name='session_started'\n), starts as (\n    select event_id, subject_id, session_id, event_ts, segment, variant,\n           epoch(cast('{{ var(\"analysis_cutoff\") }}' as timestamptz))::bigint as as_of,\n           {{ var('window_seconds') }} as window_seconds\n    from ranked_starts where rn=1\n), queries as (\n    select s.*, min(q.event_ts) as first_query_at\n    from starts s left join {{ ref('stg_events') }} q\n      on q.session_id=s.session_id and q.event_name='query_started'\n      and q.event_ts between s.event_ts and least(s.event_ts+s.window_seconds,s.as_of)\n    group by all\n), completions as (\n    select q.*, min(c.event_ts) as first_completion_at\n    from queries q left join {{ ref('stg_events') }} c\n      on c.session_id=q.session_id and c.event_name='query_completed'\n      and c.event_ts between q.first_query_at and least(q.event_ts+q.window_seconds,q.as_of)\n    group by all\n)\nselect session_id, subject_id, event_ts as cohort_ts,\n       cast(to_timestamp(event_ts) at time zone 'UTC' as date) as cohort_day,\n       segment, variant, (event_ts <= as_of-window_seconds)::integer as matured,\n       first_query_at, first_completion_at,\n       (first_query_at is not null)::integer as queried,\n       (first_completion_at is not null)::integer as converted\nfrom completions",
+      "compiled_code": "-- Non-converters must stay in the denominator: LEFT JOIN, not INNER JOIN.\nwith ranked_starts as (\n    select *, row_number() over(partition by session_id order by event_ts, event_id) as rn\n    from \"warehouse\".\"main\".\"stg_events\" where event_name='session_started'\n), starts as (\n    select event_id, subject_id, session_id, event_ts, segment, variant,\n           epoch(cast('2026-10-02T00:00:00Z' as timestamptz))::bigint as as_of,\n           3600 as window_seconds\n    from ranked_starts where rn=1\n), queries as (\n    select s.*, min(q.event_ts) as first_query_at\n    from starts s left join \"warehouse\".\"main\".\"stg_events\" q\n      on q.session_id=s.session_id and q.event_name='query_started'\n      and q.event_ts between s.event_ts and least(s.event_ts+s.window_seconds,s.as_of)\n    group by all\n), completions as (\n    select q.*, min(c.event_ts) as first_completion_at\n    from queries q left join \"warehouse\".\"main\".\"stg_events\" c\n      on c.session_id=q.session_id and c.event_name='query_completed'\n      and c.event_ts between q.first_query_at and least(q.event_ts+q.window_seconds,q.as_of)\n    group by all\n)\nselect session_id, subject_id, event_ts as cohort_ts,\n       cast(to_timestamp(event_ts) at time zone 'UTC' as date) as cohort_day,\n       segment, variant, (event_ts <= as_of-window_seconds)::integer as matured,\n       first_query_at, first_completion_at,\n       (first_query_at is not null)::integer as queried,\n       (first_completion_at is not null)::integer as converted\nfrom completions",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": null,
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "batch_size": null,
+        "lookback": 1,
+        "begin": null,
+        "persist_docs": {},
+        "post-hook": [],
+        "pre-hook": [],
+        "quoting": {},
+        "column_types": {},
+        "full_refresh": null,
+        "unique_key": null,
+        "on_schema_change": "ignore",
+        "on_configuration_change": "apply",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "contract": {
+          "enforced": false,
+          "alias_types": true
+        },
+        "event_time": null,
+        "concurrent_batches": null,
+        "access": "protected",
+        "freshness": null
+      }
+    },
+    "model.nexus_product_analytics.mart_experiment_subjects": {
+      "unique_id": "model.nexus_product_analytics.mart_experiment_subjects",
+      "name": "mart_experiment_subjects",
+      "resource_type": "model",
+      "description": "First-exposure matured subject outcomes. Repeated sessions never increase A/B sample size.",
+      "columns": {
+        "subject_id": {
+          "name": "subject_id",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        },
+        "converted": {
+          "name": "converted",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        }
+      },
+      "raw_code": "-- One independent subject, one first exposure, one binary outcome.\nwith exposures as (\n    select *, row_number() over(partition by subject_id order by cohort_ts,session_id) as rn\n    from {{ ref('fct_sessions') }} where variant is not null\n)\nselect subject_id, variant, converted, segment, session_id as first_session_id,\n       cohort_ts as first_exposure_ts\nfrom exposures where rn=1 and matured=1",
+      "compiled_code": "-- One independent subject, one first exposure, one binary outcome.\nwith exposures as (\n    select *, row_number() over(partition by subject_id order by cohort_ts,session_id) as rn\n    from \"warehouse\".\"main\".\"fct_sessions\" where variant is not null\n)\nselect subject_id, variant, converted, segment, session_id as first_session_id,\n       cohort_ts as first_exposure_ts\nfrom exposures where rn=1 and matured=1",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.fct_sessions"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": null,
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "batch_size": null,
+        "lookback": 1,
+        "begin": null,
+        "persist_docs": {},
+        "post-hook": [],
+        "pre-hook": [],
+        "quoting": {},
+        "column_types": {},
+        "full_refresh": null,
+        "unique_key": null,
+        "on_schema_change": "ignore",
+        "on_configuration_change": "apply",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "contract": {
+          "enforced": false,
+          "alias_types": true
+        },
+        "event_time": null,
+        "concurrent_batches": null,
+        "access": "protected",
+        "freshness": null
+      }
+    },
+    "model.nexus_product_analytics.stg_events": {
+      "unique_id": "model.nexus_product_analytics.stg_events",
+      "name": "stg_events",
+      "resource_type": "model",
+      "description": "Typed UTC event staging; only public synthetic identifiers.",
+      "columns": {
+        "event_id": {
+          "name": "event_id",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        },
+        "session_id": {
+          "name": "session_id",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        },
+        "event_name": {
+          "name": "event_name",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        },
+        "variant": {
+          "name": "variant",
+          "description": "",
+          "meta": {},
+          "data_type": null,
+          "constraints": [],
+          "quote": null,
+          "config": {
+            "meta": {},
+            "tags": []
+          },
+          "tags": [],
+          "granularity": null,
+          "doc_blocks": []
+        }
+      },
+      "raw_code": "select event_id, subject_id, session_id,\n       epoch(cast(timestamp as timestamptz))::bigint as event_ts,\n       event_name, segment, nullif(variant, '') as variant, latency_ms, cost_usd\nfrom {{ ref('demo_events') }}",
+      "compiled_code": "select event_id, subject_id, session_id,\n       epoch(cast(timestamp as timestamptz))::bigint as event_ts,\n       event_name, segment, nullif(variant, '') as variant, latency_ms, cost_usd\nfrom \"warehouse\".\"main\".\"demo_events\"",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "seed.nexus_product_analytics.demo_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": null,
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "batch_size": null,
+        "lookback": 1,
+        "begin": null,
+        "persist_docs": {},
+        "post-hook": [],
+        "pre-hook": [],
+        "quoting": {},
+        "column_types": {},
+        "full_refresh": null,
+        "unique_key": null,
+        "on_schema_change": "ignore",
+        "on_configuration_change": "apply",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "contract": {
+          "enforced": false,
+          "alias_types": true
+        },
+        "event_time": null,
+        "concurrent_batches": null,
+        "access": "protected",
+        "freshness": null
+      }
+    },
+    "test.nexus_product_analytics.session_integrity": {
+      "unique_id": "test.nexus_product_analytics.session_integrity",
+      "name": "session_integrity",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "select session_id from {{ ref('stg_events') }} group by session_id\nhaving count(distinct subject_id)>1 or count(distinct segment)>1\n    or count(distinct variant)>1\n    or sum(case when event_name='session_started' then 1 else 0 end)=0",
+      "compiled_code": "select session_id from \"warehouse\".\"main\".\"stg_events\" group by session_id\nhaving count(distinct subject_id)>1 or count(distinct segment)>1\n    or count(distinct variant)>1\n    or sum(case when event_name='session_started' then 1 else 0 end)=0",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.temporal_integrity": {
+      "unique_id": "test.nexus_product_analytics.temporal_integrity",
+      "name": "temporal_integrity",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "select session_id from {{ ref('fct_sessions') }}\nwhere first_query_at<cohort_ts\n   or first_completion_at<first_query_at\n   or first_completion_at>cohort_ts+{{ var('window_seconds') }}\n   or (converted=1 and queried=0)",
+      "compiled_code": "select session_id from \"warehouse\".\"main\".\"fct_sessions\"\nwhere first_query_at<cohort_ts\n   or first_completion_at<first_query_at\n   or first_completion_at>cohort_ts+3600\n   or (converted=1 and queried=0)",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.fct_sessions"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.assignment_integrity": {
+      "unique_id": "test.nexus_product_analytics.assignment_integrity",
+      "name": "assignment_integrity",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "select subject_id from {{ ref('stg_events') }}\nwhere variant is not null group by subject_id having count(distinct variant)>1",
+      "compiled_code": "select subject_id from \"warehouse\".\"main\".\"stg_events\"\nwhere variant is not null group by subject_id having count(distinct variant)>1",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.event_integrity": {
+      "unique_id": "test.nexus_product_analytics.event_integrity",
+      "name": "event_integrity",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "select event_id from {{ ref('stg_events') }}\nwhere event_ts>epoch(cast('{{ var(\"analysis_cutoff\") }}' as timestamptz))\n   or latency_ms<0 or cost_usd<0",
+      "compiled_code": "select event_id from \"warehouse\".\"main\".\"stg_events\"\nwhere event_ts>epoch(cast('2026-10-02T00:00:00Z' as timestamptz))\n   or latency_ms<0 or cost_usd<0",
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "seed.nexus_product_analytics.demo_events": {
+      "unique_id": "seed.nexus_product_analytics.demo_events",
+      "name": "demo_events",
+      "resource_type": "seed",
+      "description": "SYNTHETIC 800-subject event fixture. Independently seeded 50:50 Bernoulli assignment. No customers or business outcome.",
+      "columns": {},
+      "raw_code": "",
+      "depends_on": {
+        "macros": []
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": null,
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "seed",
+        "incremental_strategy": null,
+        "batch_size": null,
+        "lookback": 1,
+        "begin": null,
+        "persist_docs": {},
+        "post-hook": [],
+        "pre-hook": [],
+        "quoting": {},
+        "column_types": {
+          "event_id": "varchar",
+          "subject_id": "varchar",
+          "session_id": "varchar",
+          "timestamp": "varchar",
+          "event_name": "varchar",
+          "segment": "varchar",
+          "variant": "varchar",
+          "latency_ms": "double",
+          "cost_usd": "double"
+        },
+        "full_refresh": null,
+        "unique_key": null,
+        "on_schema_change": "ignore",
+        "on_configuration_change": "apply",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "contract": {
+          "enforced": false,
+          "alias_types": true
+        },
+        "event_time": null,
+        "concurrent_batches": null,
+        "delimiter": ",",
+        "quote_columns": null
+      }
+    },
+    "test.nexus_product_analytics.unique_stg_events_event_id.66ebb17438": {
+      "unique_id": "test.nexus_product_analytics.unique_stg_events_event_id.66ebb17438",
+      "name": "unique_stg_events_event_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    event_id as unique_field,\n    count(*) as n_records\n\nfrom \"warehouse\".\"main\".\"stg_events\"\nwhere event_id is not null\ngroup by event_id\nhaving count(*) > 1\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_unique",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.not_null_stg_events_event_id.715b3f7012": {
+      "unique_id": "test.nexus_product_analytics.not_null_stg_events_event_id.715b3f7012",
+      "name": "not_null_stg_events_event_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect event_id\nfrom \"warehouse\".\"main\".\"stg_events\"\nwhere event_id is null\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_not_null",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.not_null_stg_events_session_id.e91b448cdc": {
+      "unique_id": "test.nexus_product_analytics.not_null_stg_events_session_id.e91b448cdc",
+      "name": "not_null_stg_events_session_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect session_id\nfrom \"warehouse\".\"main\".\"stg_events\"\nwhere session_id is null\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_not_null",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.not_null_stg_events_subject_id.80114adbc8": {
+      "unique_id": "test.nexus_product_analytics.not_null_stg_events_subject_id.80114adbc8",
+      "name": "not_null_stg_events_subject_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect subject_id\nfrom \"warehouse\".\"main\".\"stg_events\"\nwhere subject_id is null\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_not_null",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.accepted_values_stg_events_event_name__session_started__query_started__query_completed__query_failed__feedback_submitted.0611419e9f": {
+      "unique_id": "test.nexus_product_analytics.accepted_values_stg_events_event_name__session_started__query_started__query_completed__query_failed__feedback_submitted.0611419e9f",
+      "name": "accepted_values_stg_events_event_name__session_started__query_started__query_completed__query_failed__feedback_submitted",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_accepted_values(**_dbt_generic_test_kwargs) }}{{ config(alias=\"accepted_values_stg_events_907fcaecb822c02656280e358c746efc\") }}",
+      "compiled_code": "\n    \n    \n\nwith all_values as (\n\n    select\n        event_name as value_field,\n        count(*) as n_records\n\n    from \"warehouse\".\"main\".\"stg_events\"\n    group by event_name\n\n)\n\nselect *\nfrom all_values\nwhere value_field not in (\n    'session_started','query_started','query_completed','query_failed','feedback_submitted'\n)\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_accepted_values",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": "accepted_values_stg_events_907fcaecb822c02656280e358c746efc",
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.accepted_values_stg_events_variant__A__B.30e5cb0688": {
+      "unique_id": "test.nexus_product_analytics.accepted_values_stg_events_variant__A__B.30e5cb0688",
+      "name": "accepted_values_stg_events_variant__A__B",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_accepted_values(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nwith all_values as (\n\n    select\n        variant as value_field,\n        count(*) as n_records\n\n    from \"warehouse\".\"main\".\"stg_events\"\n    group by variant\n\n)\n\nselect *\nfrom all_values\nwhere value_field not in (\n    'A','B'\n)\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_accepted_values",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.stg_events"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.unique_fct_sessions_session_id.cb0d4599f3": {
+      "unique_id": "test.nexus_product_analytics.unique_fct_sessions_session_id.cb0d4599f3",
+      "name": "unique_fct_sessions_session_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    session_id as unique_field,\n    count(*) as n_records\n\nfrom \"warehouse\".\"main\".\"fct_sessions\"\nwhere session_id is not null\ngroup by session_id\nhaving count(*) > 1\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_unique",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.fct_sessions"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.not_null_fct_sessions_session_id.c09c12e72d": {
+      "unique_id": "test.nexus_product_analytics.not_null_fct_sessions_session_id.c09c12e72d",
+      "name": "not_null_fct_sessions_session_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect session_id\nfrom \"warehouse\".\"main\".\"fct_sessions\"\nwhere session_id is null\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_not_null",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.fct_sessions"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.unique_mart_experiment_subjects_subject_id.e41d698aa9": {
+      "unique_id": "test.nexus_product_analytics.unique_mart_experiment_subjects_subject_id.e41d698aa9",
+      "name": "unique_mart_experiment_subjects_subject_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    subject_id as unique_field,\n    count(*) as n_records\n\nfrom \"warehouse\".\"main\".\"mart_experiment_subjects\"\nwhere subject_id is not null\ngroup by subject_id\nhaving count(*) > 1\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_unique",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.mart_experiment_subjects"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.not_null_mart_experiment_subjects_subject_id.59ae3ab1da": {
+      "unique_id": "test.nexus_product_analytics.not_null_mart_experiment_subjects_subject_id.59ae3ab1da",
+      "name": "not_null_mart_experiment_subjects_subject_id",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect subject_id\nfrom \"warehouse\".\"main\".\"mart_experiment_subjects\"\nwhere subject_id is null\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_not_null",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.mart_experiment_subjects"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.accepted_values_mart_experiment_subjects_converted__False__0__1.41299c5c56": {
+      "unique_id": "test.nexus_product_analytics.accepted_values_mart_experiment_subjects_converted__False__0__1.41299c5c56",
+      "name": "accepted_values_mart_experiment_subjects_converted__False__0__1",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_accepted_values(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nwith all_values as (\n\n    select\n        converted as value_field,\n        count(*) as n_records\n\n    from \"warehouse\".\"main\".\"mart_experiment_subjects\"\n    group by converted\n\n)\n\nselect *\nfrom all_values\nwhere value_field not in (\n    0,1\n)\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_accepted_values",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.mart_experiment_subjects"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.unique_mart_segments_segment.504af9474a": {
+      "unique_id": "test.nexus_product_analytics.unique_mart_segments_segment.504af9474a",
+      "name": "unique_mart_segments_segment",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    segment as unique_field,\n    count(*) as n_records\n\nfrom \"warehouse\".\"main\".\"mart_segments\"\nwhere segment is not null\ngroup by segment\nhaving count(*) > 1\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_unique",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.mart_segments"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.not_null_mart_segments_segment.557f8df403": {
+      "unique_id": "test.nexus_product_analytics.not_null_mart_segments_segment.557f8df403",
+      "name": "not_null_mart_segments_segment",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect segment\nfrom \"warehouse\".\"main\".\"mart_segments\"\nwhere segment is null\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_not_null",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.mart_segments"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.unique_mart_daily_conversion_cohort_day.d648dce2f5": {
+      "unique_id": "test.nexus_product_analytics.unique_mart_daily_conversion_cohort_day.d648dce2f5",
+      "name": "unique_mart_daily_conversion_cohort_day",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    cohort_day as unique_field,\n    count(*) as n_records\n\nfrom \"warehouse\".\"main\".\"mart_daily_conversion\"\nwhere cohort_day is not null\ngroup by cohort_day\nhaving count(*) > 1\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_unique",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.mart_daily_conversion"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    },
+    "test.nexus_product_analytics.not_null_mart_daily_conversion_cohort_day.c6479c8eb3": {
+      "unique_id": "test.nexus_product_analytics.not_null_mart_daily_conversion_cohort_day.c6479c8eb3",
+      "name": "not_null_mart_daily_conversion_cohort_day",
+      "resource_type": "test",
+      "description": "",
+      "columns": {},
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect cohort_day\nfrom \"warehouse\".\"main\".\"mart_daily_conversion\"\nwhere cohort_day is null\n\n\n",
+      "depends_on": {
+        "macros": [
+          "macro.dbt.test_not_null",
+          "macro.dbt.get_where_subquery"
+        ],
+        "nodes": [
+          "model.nexus_product_analytics.mart_daily_conversion"
+        ]
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "dbt_test__audit",
+        "database": null,
+        "tags": [],
+        "meta": {},
+        "group": null,
+        "materialized": "test",
+        "severity": "ERROR",
+        "store_failures": null,
+        "store_failures_as": null,
+        "where": null,
+        "limit": null,
+        "fail_calc": "count(*)",
+        "warn_if": "!= 0",
+        "error_if": "!= 0"
+      }
+    }
+  }
+}
