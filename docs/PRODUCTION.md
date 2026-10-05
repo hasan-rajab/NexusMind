@@ -1,6 +1,21 @@
 # NexusMind deployment
 
-Status: deployment configuration prepared; no live deployment has been verified.
+Status: live on Railway. Authenticated streaming chat, real document retrieval
+and persistence across redeployment have been verified.
+
+Application: https://nexusmind-production-3da9.up.railway.app
+
+The verified runtime is deployed at commit
+`144892922af516cb42357b3da938fcb51d4d1731`, using Groq
+`openai/gpt-oss-20b` and local Chroma storage. The earlier default Llama model
+was not available to the hosting account's key; the explicit `GROQ_MODEL`
+setting selects the verified replacement. Select a model available to your
+own provider account when deploying elsewhere.
+
+To use the application, retrieve `NEXUSMIND_API_KEY` from the Railway
+`nexusmind` service variables and enter it through the frontend's **Access
+key** button. This is the application access key; the Groq provider key
+remains on the server.
 
 Deploy the `codex/data-analytics-evidence-2026-10-05` branch using the root
 Dockerfile and `railway.json`. One Uvicorn worker serves the original frontend,
@@ -15,6 +30,7 @@ streaming chat, retrieval and governed agent endpoints.
 | `NEXUSMIND_API_KEY` | Generated random secret, at least 32 characters |
 | `LLM_PROVIDER` | `groq` or `azure_openai` |
 | `GROQ_API_KEY` | Real provider key for the Groq profile |
+| `GROQ_MODEL` | `openai/gpt-oss-20b` in the verified hosted profile |
 | `ALLOWED_ORIGINS` | Exact deployed HTTPS origin |
 | `RAG_PROVIDER` | `chroma` or `azure_search` |
 | `CHROMA_PERSIST` | `/app/data/nexusmind_chroma` for Chroma |
@@ -54,4 +70,19 @@ local initialization, not that a remote provider key is valid.
 Verify `/ready`, unauthorized HTTP 401 responses, then an authenticated
 streaming chat and document ingestion/retrieval. Verify restart persistence of
 the mounted data. Record the actual image commit and enabled provider before
-claiming a live deployment. The real provider key is still required.
+claiming a live deployment.
+
+Live verification on 5 October 2026 confirmed HTTPS frontend, health and
+readiness responses of 200, unauthorized chat/statistics responses of 401,
+authenticated ingestion and completed provider-backed streaming chat. The
+retrieval test used a clearly labelled synthetic fixture in an isolated QA
+tenant: the model called enterprise retrieval, returned the stored assessment
+code and cited its source. The same fixture remained retrievable after
+redeployment with the persistent volume mounted.
+
+The verified profile covers Groq chat and Chroma retrieval. Other provider
+and agent integrations need their own documented credentials. The separate
+committed A/B dashboard remains a synthetic analytics demonstration.
+
+Railway deployments currently pin a tested commit explicitly; automatic
+GitHub push triggers are not configured. Keep the PR unmerged until reviewed.
